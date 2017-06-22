@@ -5,7 +5,8 @@
   "main": "server.js",
   "scripts": {
     "test": "test",
-    "start": "node server.js"
+    "start": "node server.js",
+    "lint": "eslint ./"
   },
   "author": "",
   "license": "ISC",
@@ -13,6 +14,7 @@
     "body-parser": "^1.17.2",
     "express": "^4.15.3",
     "mongoose": "^4.10.8",
-    "nodemon": "^1.11.0"
+    "nodemon": "^1.11.0",
+    "eslint-config-hackreactor": "git://github.com/reactorcore/eslint-config-hackreactor",
   }
 }
