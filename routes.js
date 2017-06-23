@@ -1,6 +1,8 @@
 var express = require('express');
 var router = express.Router();
-
+var User = require('./db/models/user');
+var Card = require('./db/models/card');
+var Deck = require('./db/models/deck');
 
 //retrieve all deck
 router.get('/cards', function(req, res) {
