@@ -12,9 +12,13 @@
   "license": "ISC",
   "dependencies": {
     "body-parser": "^1.17.2",
+    "eslint": "^4.0.0",
+    "eslint-config-hackreactor": "git://github.com/reactorcore/eslint-config-hackreactor",
     "express": "^4.15.3",
     "mongoose": "^4.10.8",
-    "nodemon": "^1.11.0",
-    "eslint-config-hackreactor": "git://github.com/reactorcore/eslint-config-hackreactor"
+    "nodemon": "^1.11.0"
+  },
+  "devDependencies": {
+    "eslint-plugin-react": "^7.1.0"
   }
 }
