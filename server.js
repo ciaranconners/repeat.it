@@ -5,7 +5,7 @@ var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 
 //change name after we change the placeholder.js
-var db = require('./db/placeholder.js');
+var db = require('./db/config');
 
 app.use(require('./routes'));
 
