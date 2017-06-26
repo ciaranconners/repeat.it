@@ -1,0 +1,18 @@
+<div>
+  <h2>study page</h2>
+
+  <div id="currentCard" ng-if="$ctrl.front">
+    <p id="cardfront">{{$ctrl.deck[$ctrl.counter][$ctrl.front]}}</p>
+  </div>
+
+  <div id="currentCard" ng-if="$ctrl.back">
+    <p id="cardfront">{{$ctrl.deck[$ctrl.counter][$ctrl.back]}}</p>
+  </div>
+
+  <button id="flip" ng-click="$ctrl.handleFlip()">Flip over</button>
+  <button id="next" ng-click="$ctrl.handleNext()">Next card</button>
+</div>
+
+
+
+
