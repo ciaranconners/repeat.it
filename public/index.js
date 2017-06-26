@@ -1,10 +1,20 @@
 // 'routings'
 
 angular.module('flash-card', ['ngRoute'])
-.controller('AppCtrl', function(){
 
-})
-.component('app', {
-  controller: 'AppCtrl',
-  templateUrl: './templates/app.html' //calling from index.html
-});
+.config(['$locationProvider', '$routeProvider',
+  function config($locationProvider, $routeProvider) {
+    $locationProvider.html5Mode(true);
+    $locationProvider.hashPrefix('');
+
+    $routeProvider.
+      when('/', {
+        templateUrl: './templates/app.html',
+        controller: 'AppCtrl'
+      }).
+      when('/login', {
+        templateUrl: './templates/login.html',
+        controller: 'LoginCtrl'
+      })/*. otherwise('/')*/;
+  }
+]);

@@ -1,4 +1,4 @@
-angular.module('login', ['ngRoute'])
+angular.module('flash-card')
 
 .controller('LoginCtrl', function(){
 
