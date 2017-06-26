@@ -1,4 +1,5 @@
 angular.module('login', ['ngRoute'])
+
 .controller('LoginCtrl', function(){
 
 })
@@ -6,3 +7,4 @@ angular.module('login', ['ngRoute'])
   controller: 'LoginCtrl',
   templateUrl: './templates/login.html' //calling from index.html
 });
+
