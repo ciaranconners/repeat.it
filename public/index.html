@@ -6,15 +6,22 @@
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-route.js"></script>
     <link rel="stylesheet" type="text/css" href="styles/styles.css">
   </head>
-  <body ng-app>
-    <div>
-      <label>Name:</label>
+  <body>
+    <app ng-app="flash-card">
+      <!-- <app></app> -->
+      <h5><br/><br/>this message will disappear when <em>app</em> component is correctly rendered<br/><br/><br/></h5>
+    </app>
+    <script src="./index.js" ></script>
+    <script src="./components/app.js" ></script>
+    <script src="./templates/app.html" ></script>
+  </body>
+  </html>
+
+
+      <!-- <label>Name:</label>
       <input type="text" ng-model="yourName" placeholder="Enter a name here">
       <hr>
-      <h1>Hello {{yourName}}!</h1>
-    </div>
-  </body>
-
+      <h1>Hello {{yourName}}!</h1> -->
 
 
 
