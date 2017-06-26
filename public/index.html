@@ -5,12 +5,26 @@
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-route.js"></script>
   <link rel="stylesheet" type="text/css" href="styles/styles.css">
+  <link href="https://fonts.googleapis.com/css?family=Permanent+Marker|Raleway" rel="stylesheet">
+  <base href="/">
 </head>
 <body>
+  <header>
+  <h1>Repeat.io</h1>
+  <nav>
+    <ul>
+      <li><a href="/">Home</a></li>
+      <li><a href="/create-deck">Create a deck</a></li>
+      <li><a href="/study-deck">Study a deck</a></li>
+      <li><a href="/login">Log out</a></li>
+    </ul>
+  </nav>
+  </header>
   <app ng-app="flash-card">
-    <h5><br/><br/>this message will disappear when <em>app</em> component is correctly rendered<br/><br/><br/></h5>
+    <!--<h5><br/><br/>this message will disappear when <em>app</em> component is correctly rendered<br/><br/><br/></h5>
+   -->
+  <div ng-view>this message will disappear when <em>app</em> component is correctly rendered</div>
   </app>
-
   <script src="./index.js" ></script>
   <script src="./components/app.js" ></script>
   <script src="./components/deckList.js"></script>

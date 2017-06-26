@@ -1,6 +1,21 @@
+body {
+  font-family: 'Raleway', sans-serif;
+}
+
+h1 {
+  font-family: 'Permanent Marker', cursive;
+}
+
 li {
   list-style-type: none;
   display: inline-block;
+  margin: 0 10px;
+}
+
+#deck-info li {
+  list-style-type: none;
+  display: inline-block;
+  margin: 0 10px;
 }
 
 @media (max-width: 800px) {
