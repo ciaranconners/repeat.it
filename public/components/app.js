@@ -1,4 +1,5 @@
 angular.module('flash-card')
+
 .controller('AppCtrl', function() {
   this.deck = [{
     front: "Question",

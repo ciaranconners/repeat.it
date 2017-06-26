@@ -1,6 +1,120 @@
+body {
+  font-family: 'Raleway', sans-serif;
+}
+
+h1 {
+  font-family: 'Permanent Marker', cursive;
+}
+
 li {
   list-style-type: none;
   display: inline-block;
+  margin: 0 10px;
+}
+
+#deck-info li {
+  list-style-type: none;
+  display: inline-block;
+  margin: 0 10px;
+}
+
+@media (max-width: 800px) {
+  .wrapper {
+    width: 50%;
+    margin: 0 auto;
+    padding: 0 40px 40px 40px;
+
+    background-color: #F8FBFD;
+    border: 2px solid #e0e0e0;
+    border-radius: 4px;
+  }
+
+  .accCreationForm, .loginForm {
+    margin: 40px 0;
+    font-family: verdana, arial, helvetica, sans-serif;
+    color: #4980AE;
+  }
+
+  .separator {
+    margin-top: 25px;
+    height: 1px;
+    background-color: gray;
+  }
+
+  input {
+    border-radius: 4px;
+    border-width: 1px;
+    height: 20px;
+    padding: 2px;
+    margin: 4px 0;
+  }
+
+  .accCreationForm button, .loginForm button {
+    background-color: #4980AE;
+    color: white;
+    font-weight: bold;
+    margin-top: 5px;
+
+    border-radius: 3px;
+    border-color: #4270a2;
+    border-bottom-width: 1px;
+    border-right-width: 1px;
+
+    height: 25px;
+    padding: 2px;
+  }
+}
+
+@media (min-width: 801px) {
+  .wrapper {
+    width: 60%;
+    margin: 0 auto;
+    padding: 0 40px 40px 40px;
+
+    background-color: #F8FBFD;
+    border: 2px solid #e0e0e0;
+    border-radius: 4px;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+  }
+
+  .accCreationForm, .loginForm {
+    margin: 40px 0;
+    font-family: verdana, arial, helvetica, sans-serif;
+    color: #4980AE;
+    width: 70%;
+  }
+
+  .separator {
+    background-color: gray;
+    width: 1px;
+    margin: 25px 10% -10px; 10%;
+  }
+
+  input {
+    border-radius: 4px;
+    border-width: 1px;
+    height: 20px;
+    padding: 2px;
+    margin: 4px 0;
+  }
+
+  .accCreationForm button, .loginForm button {
+    background-color: #4980AE;
+    color: white;
+    font-weight: bold;
+    margin-top: 5px;
+
+    border-radius: 3px;
+    border-color: #4270a2;
+    border-bottom-width: 1px;
+    border-right-width: 1px;
+
+    height: 25px;
+    padding: 2px;
+  }
 }
 
 #currentCard {
