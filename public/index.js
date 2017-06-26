@@ -15,6 +15,18 @@ angular.module('flash-card', ['ngRoute'])
       when('/login', {
         templateUrl: './templates/login.html',
         controller: 'LoginCtrl'
-      })/*. otherwise('/')*/;
+      }).
+      when('/create', {
+        templateUrl: './templates/createPage.html',
+        controller: 'CreatePageCtrl'
+      }).
+      when('/edit', {
+        templateUrl: './templates/editPage.html',
+        controller: 'EditPageCtrl'
+      }).
+      when('/study', {
+        templateUrl: './templates/studyPage.html',
+        controller: 'StudyCtrl'
+      });
   }
 ]);
