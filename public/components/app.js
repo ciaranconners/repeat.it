@@ -4,7 +4,5 @@ angular.module('flash-card')
 })
 .component('app', {
   controller: 'AppCtrl',
-  templateUrl: './templates/app.html'
-  // template: '<ul>' + 'helloworld' + '</ul>'
-
+  templateUrl: './templates/app.html' //calling from index.html
 });
