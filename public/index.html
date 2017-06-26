@@ -1,18 +1,22 @@
 <!DOCTYPE html>
-  <html >
-  <head>
-    <title>Flashcards!</title>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-route.js"></script>
-    <link rel="stylesheet" type="text/css" href="styles/styles.css">
-  </head>
-  <body>
-    <app ng-app="flash-card">
-      <!-- <app></app> -->
-      <h5><br/><br/>this message will disappear when <em>app</em> component is correctly rendered<br/><br/><br/></h5>
-    </app>
-    <script src="./index.js" ></script>
-    <script src="./components/app.js" ></script>
-    <script src="./templates/app.html" ></script>
-  </body>
-  </html>
+<html >
+<head>
+  <title>Flashcards!</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-route.js"></script>
+  <link rel="stylesheet" type="text/css" href="styles/styles.css">
+</head>
+<body>
+  <app ng-app="flash-card">
+    <h5><br/><br/>this message will disappear when <em>app</em> component is correctly rendered<br/><br/><br/></h5>
+  </app>
+
+  <script src="./index.js" ></script>
+  <script src="./components/app.js" ></script>
+  <script src="./components/deckList.js"></script>
+  <script src="./components/login.js"></script>
+  <script src="./components/createPage.js"></script>
+  <script src="./components/editPage.js"></script>
+  <script src="./components/studyPage.js"></script>
+</body>
+</html>
