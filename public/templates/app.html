@@ -1,11 +1,12 @@
-<div>
+<div ng-controller="AppCtrl as app">
   <h3>Choose a deck</h3>
-  <!--   <div ng-repeat="deck in $ctrl.decks">{{n}} -->
-  <div id="deck-info"><a href="#">Technical assessment prep</a>
-    <ul>
-      <li><button>Study</button></li>
-      <li><button>Edit</button></li>
-      <li><button>Delete</button></li>
-    </ul>
-  </div>
+  <ul>
+    <li ng-repeat="item in app.data">
+      {{ item.deckname }}
+      <button class="btn">Study</button>
+      <button class="btn">Edit</button>
+      <button class="btn">Delete</button>
+      <br>
+    </li>
+  </ul>
 </div>
