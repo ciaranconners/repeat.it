@@ -1,10 +1,7 @@
-<div ng-init='data=[{"deckname":"Tech Assessment Prep","owner":{"username":"name","password":"password"},"public":true,"date":"2017-06-27T16:43:21.081Z","cards":["card1","card2","card3"]},{"deckname":"GMAT","owner":{"username":"Sheena","password":"password"},"public":true,"date":"2017-06-27T16:43:21.081Z","cards":["card1","card2","card3"]},{"deckname":"SAT","owner":{"username":"James","password":"password"},"public":true,"date":"2017-06-27T16:43:21.081Z","cards":["card1","card2","card3"]}]'>
+<div ng-controller="AppCtrl as app">
   <h3>Choose a deck</h3>
-
-  <!--   <div ng-repeat="deck in $ctrl.decks">{{n}} -->
-
   <ul>
-    <li style="" ng-repeat="item in data">
+    <li ng-repeat="item in app.data">
       {{ item.deckname }}
       <button class="btn">Study</button>
       <button class="btn">Edit</button>
@@ -12,43 +9,4 @@
       <br>
     </li>
   </ul>
-
-
 </div>
-
-<!--
-
-[{
-  deckname: 'Tech Assessment Prep',
-  owner: {
-    username: 'name',
-    password: 'password'
-  },
-  public: true,
-  date: new Date,
-  cards: ['card1', 'card2', 'card3']
-},
-{
-  deckname: 'GMAT',
-  owner: {
-    username: 'Sheena',
-    password: 'password'
-  },
-  public: true,
-  date: new Date,
-  cards: ['card1', 'card2', 'card3']
-},
-{
-  deckname: 'SAT',
-  owner: {
-    username: 'James',
-    password: 'password'
-  },
-  public: true,
-  date: new Date,
-  cards: ['card1', 'card2', 'card3']
-}]
-
-ng-init='data=[{"deckname":"Tech Assessment Prep","owner":{"username":"name","password":"password"},"public":true,"date":"2017-06-27T16:43:21.081Z","cards":["card1","card2","card3"]},{"deckname":"GMAT","owner":{"username":"Sheena","password":"password"},"public":true,"date":"2017-06-27T16:43:21.081Z","cards":["card1","card2","card3"]},{"deckname":"SAT","owner":{"username":"James","password":"password"},"public":true,"date":"2017-06-27T16:43:21.081Z","cards":["card1","card2","card3"]}]'
-
- -->
