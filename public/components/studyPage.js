@@ -1,47 +1,46 @@
 angular.module('flash-card')
 .controller('StudyCtrl', function() {
 
+  this.deck = [{
+    front: "Question",
+    back: "Answer"
+  },
+  {
+    front: "1+1=?",
+    back: "2"
+  }];
+
   this.counter = 0;
   this.front = true;
-  this.back = false;
+  this.current = this.deck[0];
 
   this.handleNext = () => {
     this.counter++;
     this.front = true;
-    this.back = false;
-    console.log(this.counter)
+    this.current = this.deck[this.counter]
+  };
+
+  this.handlePrev = () => {
+    this.counter--;
+    this.front = true;
+    this.current = this.deck[this.counter]
   };
 
   this.handleFlip = () => {
-    if(this.front) {
-      this.front = false;
-      this.back = true;
-    } else {
-      this.front = true;
-      this.back = false;
-    }
+    this.front = !this.front
+  };
 
-    console.log(this.front)
-  }
+  this.handleRight = () => {
+    console.log('right');
+  };
 
-  // this.deck = [{
-  //   front: "Question",
-  //   back: "Answer"
-  // },
-  // {
-  //   front: "1+1=?",
-  //   back: "2"
-  // }];
-
-  //set current display object to front of first card:
-    // this.display = this.deck[counter][side]
-
+  this.handleWrong = () => {
+    console.log('wrong');
+  };
 })
-.component('studyPage', {
-  controller: 'StudyCtrl',
-  templateUrl: './templates/studyPage.html',
-  bindings: {
-    deck: '<'
-  }
-});
+// .component('studyPage', {
+//   controller: 'StudyCtrl',
+//   templateUrl: './templates/studyPage.html'
+
+// });
 

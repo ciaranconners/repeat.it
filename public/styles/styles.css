@@ -2,7 +2,7 @@ body {
   font-family: 'Raleway', sans-serif;
 }
 
-h1 {
+h1 h2{
   font-family: 'Permanent Marker', cursive;
 }
 
@@ -125,9 +125,9 @@ li {
     margin: 25px;
 }
 
-#cardFront {
+#cardbody {
     display: table-cell;
-    vertical-align: middle;
+    text-align: center;
 }
 
 .card {
