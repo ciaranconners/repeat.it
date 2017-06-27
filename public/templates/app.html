@@ -1,11 +1,54 @@
-<div>
+<div ng-init='data=[{"deckname":"Tech Assessment Prep","owner":{"username":"name","password":"password"},"public":true,"date":"2017-06-27T16:43:21.081Z","cards":["card1","card2","card3"]},{"deckname":"GMAT","owner":{"username":"Sheena","password":"password"},"public":true,"date":"2017-06-27T16:43:21.081Z","cards":["card1","card2","card3"]},{"deckname":"SAT","owner":{"username":"James","password":"password"},"public":true,"date":"2017-06-27T16:43:21.081Z","cards":["card1","card2","card3"]}]'>
   <h3>Choose a deck</h3>
+
   <!--   <div ng-repeat="deck in $ctrl.decks">{{n}} -->
-  <div id="deck-info"><a href="#">Technical assessment prep</a>
-    <ul>
-      <li><button>Study</button></li>
-      <li><button>Edit</button></li>
-      <li><button>Delete</button></li>
-    </ul>
-  </div>
+
+  <ul>
+    <li style="" ng-repeat="item in data">
+      {{ item.deckname }}
+      <button class="btn">Study</button>
+      <button class="btn">Edit</button>
+      <button class="btn">Delete</button>
+      <br>
+    </li>
+  </ul>
+
+
 </div>
+
+<!--
+
+[{
+  deckname: 'Tech Assessment Prep',
+  owner: {
+    username: 'name',
+    password: 'password'
+  },
+  public: true,
+  date: new Date,
+  cards: ['card1', 'card2', 'card3']
+},
+{
+  deckname: 'GMAT',
+  owner: {
+    username: 'Sheena',
+    password: 'password'
+  },
+  public: true,
+  date: new Date,
+  cards: ['card1', 'card2', 'card3']
+},
+{
+  deckname: 'SAT',
+  owner: {
+    username: 'James',
+    password: 'password'
+  },
+  public: true,
+  date: new Date,
+  cards: ['card1', 'card2', 'card3']
+}]
+
+ng-init='data=[{"deckname":"Tech Assessment Prep","owner":{"username":"name","password":"password"},"public":true,"date":"2017-06-27T16:43:21.081Z","cards":["card1","card2","card3"]},{"deckname":"GMAT","owner":{"username":"Sheena","password":"password"},"public":true,"date":"2017-06-27T16:43:21.081Z","cards":["card1","card2","card3"]},{"deckname":"SAT","owner":{"username":"James","password":"password"},"public":true,"date":"2017-06-27T16:43:21.081Z","cards":["card1","card2","card3"]}]'
+
+ -->
