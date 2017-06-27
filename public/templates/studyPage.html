@@ -1,18 +1,15 @@
-<div>
-  <h2>study page</h2>
+<div ng-controller="StudyCtrl as study">
 
-  <div id="currentCard" ng-if="$ctrl.front">
-    <p id="cardfront">{{$ctrl.deck[$ctrl.counter][$ctrl.front]}}</p>
+  <div id="currentCard">
+    <h1 id="cardbody" ng-if="study.front">{{ study.current.front }}</h1>
+    <h1 id="cardbody" ng-if="!study.front">{{ study.current.back }}</h1>
   </div>
 
-  <div id="currentCard" ng-if="$ctrl.back">
-    <p id="cardfront">{{$ctrl.deck[$ctrl.counter][$ctrl.back]}}</p>
-  </div>
-
-  <button id="flip" ng-click="$ctrl.handleFlip()">Flip over</button>
-  <button id="next" ng-click="$ctrl.handleNext()">Next card</button>
+  <button id="flip" ng-click="study.handleFlip()">Flip card</button>
+  <br>
+  <button id="right" ng-click="study.handleRight()" ng-if="!study.front">Right</button>
+  <button id="wrong" ng-click="study.handleWrong()" ng-if="!study.front">Wrong</button>
+  <br>
+  <button id="previous" ng-click="study.handlePrev()">Previous card</button>
+  <button id="next" ng-click="study.handleNext()">Next card</button>
 </div>
-
-
-
-

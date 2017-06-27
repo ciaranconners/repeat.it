@@ -25,8 +25,8 @@ angular.module('flash-card', ['ngRoute'])
         controller: 'EditPageCtrl'
       }).
       when('/study', {
-        templateUrl: './templates/studyPage.html',
-        controller: 'StudyCtrl'
+        controller: 'StudyCtrl',
+        templateUrl: './templates/studyPage.html'
       });
   }
 ]);
