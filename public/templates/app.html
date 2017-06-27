@@ -3,8 +3,8 @@
   <ul>
     <li ng-repeat="item in app.data">
       {{ item.deckname }}
-      <a href="/study"><button class="btn">Study</button></a>
-      <a href="/edit"><button class="btn">Edit</button></a>
+      <a href="/study" ng-click="app.getDeck(item)"><button class="btn" >Study</button></a>
+      <a href="/edit"><button class="btn" ng-click="app.getDeck(item)">Edit</button></a>
       <button class="btn">Delete</button>
       <br>
     </li>
