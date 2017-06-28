@@ -4,26 +4,48 @@ var User = require('./db/models/user');
 var Card = require('./db/models/card');
 var Deck = require('./db/models/deck');
 
-//retrieve all deck
-router.get('/cards', function(req, res) {
-  res.send("hello world");
-})
+var bodyParser = require('body-parser');
 
+//retrieve all decks
+router.get('/decks', function(req, res) {
+  Deck.find({}).then(function(decks) {res.json(decks);});
+});
 
-//save a new deck
-router.post('/cards', function(req, res) {
-  res.send("hello world");
-})
+router.post('/decks', function(req, res) {
+  Deck.create(req.body).then(function(deck) {
+    res.json(deck);
+  });
+});
 
+router.put('/decks/:id', function(req, res) {
+  Deck.findByIdAndUpdate({_id: req.params.id}, req.body, {new:true}).then(function(deck) {
+    res.json(deck);
+  });
+});
 
-//edit deck
-router.put('/cards/:id', function(req, res) {
-  res.send("hello world");
-})
+router.delete('/decks/:id', function(req, res) {
+  Deck.findByIdAndRemove({_id: req.params.id}).then(function(deletedDeck) {
+    res.json(deletedDeck);
+  });
+});
 
-//delete a card from the deck
-router.delete('/cards/:id', function(req, res) {
-  res.send("hello world");
-})
+router.post('/login', function(req, res) {
+  // req contains username and password
+    // check if username in DB or no
+    //if yes
+      // validate password
+      // response => indicates result of that validation
+    // if no,
+      // response => invalid username
+});
+
+router.post('/signup', function(req, res) {
+  // req contains username and password
+    // check if username in DB or no
+    //if yes
+      // response => username taken
+    // if no, create new user
+      // response => new user created
+});
 
 module.exports = router;

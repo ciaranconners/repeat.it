@@ -1,14 +1,10 @@
-const mongoose = require('mongoose');
-const Schema = mongoose.Schema;
-const db = require('../config');
+var mongoose = require('mongoose');
+var Schema = mongoose.Schema;
+var db = require('../config');
 
-const CardSchema = new Schema({
-  front: {
-    type: String
-  },
-  back: {
-    type: String
-  },
+var CardSchema = new Schema({
+  front: String,
+  back: String,
   progress: Number,
   age: Number,
   effort: Number,
@@ -22,4 +18,9 @@ const CardSchema = new Schema({
   }
 });
 
-module.exports = CardSchema;
+var Card = mongoose.model('Card', CardSchema);
+
+module.exports = {
+  Card: Card,
+  CardSchema: CardSchema
+};
