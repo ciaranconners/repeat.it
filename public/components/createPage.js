@@ -23,6 +23,12 @@ angular.module('flash-card')
       });
     }
   }
+
+  this.deleteCard = function(card) {
+    var i = this.newDeck.cards.indexOf(card);
+    this.newDeck.cards.splice(i,1);
+  }
+
 })
 .component('createPage', {
   controller: 'CreatePageCtrl',
