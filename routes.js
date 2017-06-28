@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-var User = require('./db/models/user');
+var UserFile = require('./db/models/user');
 var Card = require('./db/models/card');
 var Deck = require('./db/models/deck');
 
@@ -29,23 +29,64 @@ router.delete('/decks/:id', function(req, res) {
   });
 });
 
+///////////////////////////
+//////////////////////////
+
+router.get('/users', function(req, res) {
+  UserFile.User.find({}).then(function(users) {res.json(users);});
+});
+
+router.post('/users', function(req, res) {
+  UserFile.User.create(req.body).then(function(user) {
+    res.json(user);
+  });
+});
+
+router.put('/users/:id', function(req, res) {
+  UserFile.User.findByIdAndUpdate({_id: req.params.id}, req.body, {new:true}).then(function(user) {
+    res.json(user);
+  });
+});
+
+router.delete('/users/:id', function(req, res) {
+  UserFile.User.findByIdAndRemove({_id: req.params.id}).then(function(deletedUser) {
+    res.json(deletedUser);
+  });
+});
+
+/////////
+////////
+
 router.post('/login', function(req, res) {
-  // req contains username and password
-    // check if username in DB or no
-    //if yes
-      // validate password
-      // response => indicates result of that validation
-    // if no,
-      // response => invalid username
+  UserFile.User.findOne({username: req.body.username}).then(function(user) {
+    if (user !== null) {
+      if (user.password === req.body.password) {
+        console.log('user authenticated');
+        res.status(200).send('welcome!');
+      } else {
+        console.log('invalid user/password combo');
+        res.status(200).send('try again');
+      }
+    } else {
+      console.log('invalid username');
+      res.send('invalid username');
+    }
+  });
 });
 
 router.post('/signup', function(req, res) {
-  // req contains username and password
-    // check if username in DB or no
-    //if yes
-      // response => username taken
-    // if no, create new user
-      // response => new user created
+  UserFile.User.findOne({username: req.body.username}).then(function(user) {
+    if (user === null) {
+      UserFile.User.create({
+        username: req.body.username,
+        password: req.body.password
+      }).then(function(user) {
+        res.status(200).send('welcome!');
+      });
+    } else {
+      res.send('username already taken');
+    }
+  });
 });
 
 module.exports = router;
