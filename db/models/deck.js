@@ -1,20 +1,18 @@
-const mongoose = require('mongoose');
-const Schema = mongoose.Schema;
-const CardSchema = require('./card');
-const UserSchema = require('./user');
-const db = require('../config');
+var mongoose = require('mongoose');
+var Schema = mongoose.Schema;
+var cardFile = require('./card');
+var userFile = require('./user');
+var db = require('../config');
 
-const DeckSchema = new Schema({
-  deckname: {
-    type: String
-  },
-  owner: UserSchema,
+var DeckSchema = new Schema({
+  deckname: String,
+  owner: userFile.UserSchema,
   public: {
     type: Boolean,
     default: false
   },
   date: Date,
-  cards: [CardSchema]
+  cards: [cardFile.CardSchema]
 });
 
-module.exports = DeckSchema;
+module.exports = mongoose.model('Deck', DeckSchema);
