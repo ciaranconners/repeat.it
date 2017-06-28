@@ -1,12 +1,29 @@
-<h1>DECK NAME: {{$ctrl.deck.name}}</h1>
+<div ng-controller="EditPageCtrl as edit">
+<h1>DECK NAME: {{edit.deck.deckname}}</h1>
 
 <div>
   <individualcard></individualcard>
    <!--the above line references a to-be-made Angular component  -->
+   <createform>
+    <label class="left-edit">Front<input ng-model="edit.newCard.front" required ></label><br>
+    <label class="right-edit">Back<input ng-model="edit.newCard.back" required ></label><br>
+    <button ng-click="edit.addCard(edit.newCard)">Add Card</button>
+  </createform>
 </div>
 
 <div>
-  <cardlist></cardlist>
+  <cardlist ng-repeat="card in edit.deck.cards" >
+<!--     <div ng-click="edit.activateEdit(card)" ng-if="!edit.showEdit">
+      <div class="card left-edit">{{card.front}}</div>
+      <div class="card right-edit">{{card.back}}</div>
+    </div> -->
+
+  <editform>
+    <label class="left-edit">Front<input ng-model="card.front"></label><br>
+    <label class="right-edit">Back<input ng-model="card.back"></label><br>
+  </editform>
+  </cardlist>
 </div>
 
-<button type="button">Click to Save the Deck</button>
+<button type="button" ng-click="edit.handleSave()">Click to Save the Deck</button>
+</div>

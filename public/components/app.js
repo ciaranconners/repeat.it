@@ -7,7 +7,7 @@ angular.module('flash-card')
 
   this.getDeck = function(deck){
     localStorage.setItem('currentDeck', JSON.stringify(deck));
-    console.log(JSON.stringify(deck.cards))
+    console.log(JSON.stringify(deck))
   }
 
   this.current = localStorage.getItem('currentDeck') // find out what this is
