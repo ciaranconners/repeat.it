@@ -1,5 +1,5 @@
 angular.module('flash-card')
-.controller('CreatePageCtrl', function(){
+.controller('CreatePageCtrl', function($http, $location){
   this.newDeck = {};
   this.newDeck.cards = [];
   this.newCard = {};
@@ -16,9 +16,19 @@ angular.module('flash-card')
   this.handleSave = function() {
     if(!this.newDeck.deckname) {
       alert("Please enter a deck name")
+    } else {
+      console.log(this.newDeck);
+      $http.post('/decks', this.newDeck).then(function() {
+        $location.path('/');
+      });
     }
-    console.log(this.newDeck)
   }
+
+  this.deleteCard = function(card) {
+    var i = this.newDeck.cards.indexOf(card);
+    this.newDeck.cards.splice(i,1);
+  }
+
 })
 .component('createPage', {
   controller: 'CreatePageCtrl',

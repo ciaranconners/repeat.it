@@ -1,5 +1,5 @@
 angular.module('flash-card')
-.controller('EditPageCtrl', function($http){
+.controller('EditPageCtrl', function($http, $location){
   var that = this;
   this.showEdit = false;
 
@@ -20,14 +20,16 @@ angular.module('flash-card')
   }
 
   this.handleSave = function() {
-    // $http.post('../data/data.json', this.deck).then(function(res) {
-    //   console.log('success');
-    // });
-    console.log(this.deck)
-
-    // in future this will save to db
+    var id = this.deck._id;
+    $http.put('/decks/' + id, this.deck).then(function() {
+      $location.path('/');
+    });
   }
 
+  this.deleteCard = function(card) {
+    var i = this.deck.cards.indexOf(card);
+    this.deck.cards.splice(i,1);
+  }
 })
 .component('editPage', {
   controller: 'EditPageCtrl',
