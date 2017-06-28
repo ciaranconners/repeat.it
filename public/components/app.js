@@ -5,17 +5,10 @@ angular.module('flash-card')
     that.data = res.data;
   });
 
-  // this.getDeck = function(){
-  //   console.log('hello');
-  // }
   this.getDeck = function(deck){
-    localStorage.setItem('currentDeck', deck);
+    localStorage.setItem('currentDeck', JSON.stringify(deck));
     console.log(deck);
   }
-
-
-  //something like below later on for click event
-  // deckSvc.setDeck(currentDeck) //variable in the html
 })
 .component('app', {
   controller: 'AppCtrl',
@@ -39,20 +32,3 @@ angular.module('flash-card')
 //     // _currentDeck = newValue; //?
 //   }
 // }, true);
-
-
-
-
-
-//what is our current problem?
-
-/*
-  Should we come back to here later?
-
-  pass in a id and retrieve the deck from DB
-
-  How do we figure this out...
-
-
-
-*/
