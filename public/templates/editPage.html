@@ -13,10 +13,6 @@
 
 <div>
   <cardlist ng-repeat="card in edit.deck.cards" >
-<!--     <div ng-click="edit.activateEdit(card)" ng-if="!edit.showEdit">
-      <div class="card left-edit">{{card.front}}</div>
-      <div class="card right-edit">{{card.back}}</div>
-    </div> -->
 
   <editform>
     <label class="left-edit">Front<input ng-model="card.front"></label><br>

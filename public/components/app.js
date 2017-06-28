@@ -1,7 +1,8 @@
 angular.module('flash-card')
 .controller('AppCtrl', function($http) {
   var that = this;
-  $http.get('../data/data.json').then(function(res) {
+
+  $http.get('/decks').then(function(res) {
     that.data = res.data;
   });
 
@@ -10,28 +11,17 @@ angular.module('flash-card')
     console.log(JSON.stringify(deck))
   }
 
-  this.current = localStorage.getItem('currentDeck') // find out what this is
+  this.handleDelete = function(deck) {
+    var id = deck._id;
+    $http.delete('/decks/' + id).then(function() {
+      $http.get('/decks').then(function(res) {
+        that.data = res.data;
+      });
+    });
+  }
 
 })
 .component('app', {
   controller: 'AppCtrl',
   templateUrl: './templates/app.html',
-})
-// .service("deckSvc", function () {
-//   var _currentDeck = {};          //internally in the service
-//   return {
-//     getDeck: function () {
-//       return _currentDeck;
-//     },
-//     setDeck: function (value) {
-//       _currentDeck = value;
-//     }
-//   };
-// })
-// this.$watch(function () { return deckSvc.getDeck(); }, function (newValue, oldValue) {
-//   if (newValue !== null) {
-//     //update Controller2's xxx value
-//     this.currentDeck = newValue;
-//     // _currentDeck = newValue; //?
-//   }
-// }, true);
+});
