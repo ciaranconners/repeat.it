@@ -5,13 +5,14 @@ angular.module('flash-card')
     that.data = res.data;
   });
 
-  // this.getDeck = function(){
-  //   console.log('hello');
-  // }
+
   this.getDeck = function(deck){
-    localStorage.setItem('currentDeck', deck);
-    console.log(deck);
+    localStorage.setItem('currentDeck', JSON.stringify(deck));
+    console.log(JSON.stringify(deck.cards))
   }
+
+  this.current = localStorage.getItem('currentDeck')
+
 
 
   //something like below later on for click event
