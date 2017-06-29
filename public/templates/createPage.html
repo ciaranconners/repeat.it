@@ -1,28 +1,45 @@
 <div ng-controller="CreatePageCtrl as create">
-<h1>DECK NAME: <input ng-model="create.newDeck.deckname" required /></h1>
 
-<div>
-  <createform>
-    <label class="left-edit">Front<input ng-model="create.newCard.front" required ></label><br>
-    <label class="right-edit">Back<input ng-keyup="$event.keyCode == 13 && create.addCard(create.newCard)" ng-model="create.newCard.back" required ></label><br>
-    <button ng-click="create.addCard(create.newCard)">Add Card</button>
-  </createform>
-</div>
+  <div class="container">
+  <h1>DECK NAME: <input ng-model="create.newDeck.deckname" required /></h1>
 
-<div>
-  <cardlist ng-repeat="card in create.newDeck.cards" >
-<!--     <div ng-click="edit.activateEdit(card)" ng-if="!edit.showEdit">
-      <div class="card left-edit">{{card.front}}</div>
-      <div class="card right-edit">{{card.back}}</div>
-    </div> -->
+    <div class="row">
+      <div class="col-xs-5 flashcard">
+        <h4>Question</h4>
+        <hr>
+        <textarea placeholder="Enter a question" ng-model="create.newCard.front"></textarea>
+      </div>
 
-  <editform>
-    <label class="left-edit">Front<input ng-model="card.front"></label><br>
-    <label class="right-edit">Back<input ng-model="card.back"></label>
-    <button ng-click="create.deleteCard(card)">Delete card</button>
-  </editform>
-  </cardlist>
-</div>
+      <div class="col-xs-5 flashcard">
+        <h4>Answer</h4>
+        <hr>
+        <textarea placeholder="Enter the answer" ng-keyup="$event.keyCode == 13 && create.addCard(create.newCard)" ng-model="create.newCard.back"></textarea>
+      </div>
+    </div>
 
-<button type="button" ng-click="create.handleSave()">Click to Save the Deck</button>
+    <button class="btn-primary" ng-click="create.addCard(create.newCard)">Add card</button>
+
+    <hr> <!-- Start of list of currently made cards -->
+
+    <div ng-repeat="card in create.newDeck.cards" >
+      <div class="row">
+        <div class="col-xs-5 flashcard">
+          <h4>Question</h4>
+          <hr>
+          <textarea placeholder="Enter a question" ng-model="card.front"></textarea>
+        </div>
+
+        <div class="col-xs-5 flashcard">
+          <h4>Answer</h4>
+          <hr>
+          <textarea placeholder="Enter the answer" ng-model="card.back"></textarea>
+        </div>
+      </div>
+
+      <button class="btn-danger" ng-click="create.deleteCard(card)">Delete card</button>
+
+    </div> <!-- end ng-repeat div -->
+
+    <button class="btn-primary savedeckbtn" type="button" ng-click="create.handleSave()">Click to save the deck</button>
+  </div>
 </div>
