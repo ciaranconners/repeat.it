@@ -1,24 +1,6 @@
 angular.module('flash-card')
 .controller('StudyCtrl', function() {
 
-  // this.deck = [{
-  //   front: "Question",
-  //   back: "Answer"
-  // },
-  // {
-  //   front: "1+1=?",
-  //   back: "2"
-  // },
-  // {
-  //   front: "What is the capital of Texas?",
-  //   back: "Austin"
-  // },
-  // {
-  //   front: "Here is a much longer question to test text-wrapping in the flash card",
-  //   back: "Here is a correspondingly long answer to the long question in order to confirm text-wrapping in the flash card"
-  // }];
-  // console.log(this.deck)
-
   this.deck = JSON.parse(localStorage.getItem('currentDeck')).cards;
   console.log("study deck", this.deck)
 
