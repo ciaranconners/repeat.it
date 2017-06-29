@@ -1,22 +1,22 @@
 <div class="wrapper" ng-controller="LoginCtrl as login">
   <form class="accCreationForm">
     <h4>CREATE A NEW ACCOUNT</h4>
-    <input id="accName" type="text" placeholder="choose a username" ng-model="accName"/>
+    <input id="accName" type="text" placeholder="choose a username" ng-model="login.accName"/>
     <br />
-    <input id="accPw" type="text" placeholder="password" ng-model="accPw"/>
+    <input id="accPw" type="text" placeholder="password" ng-model="login.accPw"/>
     <br />
-    <input id="accVerifyPw" type="text" placeholder="verify password" ng-model="accVerifyPw"/>
+    <input id="accVerifyPw" type="text" placeholder="verify password" ng-model="login.accVerifyPw"/>
     <br />
-    <button>SIGN UP</button>
+    <button ng-click="login.signup()">SIGN UP</button>
   </form>
 
   <div class="separator"></div>
 
   <form class="loginForm">
     <h4>LOGIN</h4>
-    <input id="loginName" type="text" placeholder="username" ng-model="loginName"/>
+    <input id="loginName" type="text" placeholder="username" ng-model="login.loginName"/>
     <br />
-    <input id="loginPw" type="text" placeholder="password" ng-model="loginPw"/>
+    <input id="loginPw" type="text" placeholder="password" ng-model="login.loginPw"/>
     <br />
     <button ng-click="login.login()">LOG IN</button>
   </form>

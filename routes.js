@@ -57,34 +57,51 @@ router.delete('/users/:id', function(req, res) {
 /////////
 ////////
 
+var bcrypt = require('bcrypt');
+var saltRounds = 10;
+
 router.post('/login', function(req, res) {
-  UserFile.User.findOne({username: req.body.username}).then(function(user) {
+  UserFile.User.findOne({
+    username: req.body.username
+  }).then(function(user) {
     if (user !== null) {
-      if (user.password === req.body.password) {
-        console.log('user authenticated');
-        res.status(200).send('welcome!');
-      } else {
-        console.log('invalid user/password combo');
-        res.status(200).send('try again');
-      }
+      bcrypt.compare(req.body.password, user.password, function(err, result) {
+        if (result === true) {
+          console.log('user authenticated');
+          res.status(200).json('OK');
+        } else {
+          console.log('invalid user/password combo');
+          res.status(200).json('NO');
+        }
+      });
     } else {
       console.log('invalid username');
-      res.send('invalid username');
+      res.json('NO');
     }
   });
 });
 
 router.post('/signup', function(req, res) {
-  UserFile.User.findOne({username: req.body.username}).then(function(user) {
+  UserFile.User.findOne({
+    username: req.body.username
+  }).then(function(user) {
     if (user === null) {
-      UserFile.User.create({
-        username: req.body.username,
-        password: req.body.password
-      }).then(function(user) {
-        res.status(200).send('welcome!');
+      bcrypt.genSalt(saltRounds, function(err, salt) {
+        bcrypt.hash(req.body.password, salt, function(err, hash) {
+          if (err) {
+            console.error(err);
+          } else {
+            UserFile.User.create({
+              username: req.body.username,
+              password: hash
+            }).then(function(user) {
+              res.status(200).json('OK');
+            });
+          }
+        });
       });
     } else {
-      res.send('username already taken');
+      res.json('NO');
     }
   });
 });

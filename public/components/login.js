@@ -1,27 +1,39 @@
 angular.module('flash-card')
 
-.controller('LoginCtrl', function(loginSvc){
+.controller('LoginCtrl', function(loginSvc, $location){
+
   this.login = function() {
-    console.log('inside login');
-    var loginName = this.loginName;
-    console.log('loginName', loginName);
-    loginSvc.login(this.loginName, this.password, function(res) {
+    loginName = this.loginName;
+    loginPw = this.loginPw;
+    loginSvc.login(loginName, loginPw, function(res) {
       if (res.error) {
         console.error(res.error);
-      } else {
-        window.currentUser = this.loginName;
-        window.location = 'http://localhost:3000/';
+      } else if (res.data === 'OK') {
+        window.currentUser = loginName;
+        $location.path('/app');
+      } else if (res.data === 'NO') {
+        alert('incorrect username or password, please try again');
       }
     });
   };
 
   this.signup = function() {
-    loginSvc.login(this.accName, this.accPw, function(res) {
+    accName = this.accName;
+    accPw = this.accPw;
+    accVerifyPw = this.accVerifyPw;
+    console.log(accName);
+    loginSvc.signup(accName, accPw, function(res) {
+      if (this.accPw !== this.accVerifyPw) {
+        alert('your passwords do not match; please check and re-try');
+      }
+
       if (res.error) {
         console.error(res.error);
-      } else {
+      } else if (res.data === 'OK') {
         window.currentUser = this.accName;
-        window.location = 'http://localhost:3000/';
+        $location.path('/app');
+      } else if (res.data === 'NO') {
+        alert('username taken');
       }
     });
   };
