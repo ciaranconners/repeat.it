@@ -1,7 +1,5 @@
 angular.module('flash-card')
 .controller('EditPageCtrl', function($http, $location){
-  var that = this;
-  this.showEdit = false;
 
   this.newCard = {};
   this.deck = JSON.parse(localStorage.getItem('currentDeck'));
@@ -13,11 +11,7 @@ angular.module('flash-card')
       this.deck.cards.push(this.newCard);
       this.newCard = {};
     }
-  }
-
-  this.activateEdit = function(card) {
-    this.showEdit = !this.showEdit;
-  }
+  };
 
   this.handleSave = function() {
 
@@ -29,13 +23,34 @@ angular.module('flash-card')
         $location.path('/');
       });
     }
-
-  }
+  };
 
   this.deleteCard = function(card) {
     var i = this.deck.cards.indexOf(card);
     this.deck.cards.splice(i,1);
-  }
+  };
+
+  this.moveUp = function(card) {
+    var index = this.deck.cards.indexOf(card);
+    if(index === 0) {
+      return;
+    } else {
+      var temp = this.deck.cards[index - 1];
+      this.deck.cards[index - 1] = this.deck.cards[index];
+      this.deck.cards[index] = temp;
+    }
+  };
+
+  this.moveDown = function(card) {
+    var index = this.deck.cards.indexOf(card);
+    if(index === this.deck.cards.length-1) {
+      return;
+    } else {
+      var temp = this.deck.cards[index + 1];
+      this.deck.cards[index + 1] = this.deck.cards[index];
+      this.deck.cards[index] = temp;
+    }
+  };
 })
 .component('editPage', {
   controller: 'EditPageCtrl',
