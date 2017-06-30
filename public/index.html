@@ -37,9 +37,9 @@
 
       <div class="collapse navbar-collapse" id="my-navbar">
         <ul class="nav navbar-nav navbar-right">
-          <li><a href="/">Home</a></li>
-          <li><a href="/create">Create a deck</a></li>
-          <li><a href="/login">Log out</a></li>
+          <li><a id="home-btn" href="/app">Home</a></li>
+          <li><a id="create-btn" href="/create">Create a deck</a></li>
+          <li><a id="logout-btn" href="/login">Log out</a></li>
         </ul>
       </div>
     </div>
@@ -56,6 +56,18 @@
       $(".navbar-collapse a").click(function(){
         $(".navbar-collapse").collapse("hide");
       });
+    });
+    //listeners for global navigation buttons:
+    $('#home-btn').on('click', function() {
+      if (localStorage.length === 0) {
+        alert('you\'re not logged in currently but feel free to play around. your decks will not be saved.');
+      }
+    });
+    $('#create-btn').on('click', function() {
+      alert('you\'re not logged in currently but feel free to play around. your decks will not be saved.');
+    });
+    $('#logout-btn').on('click', function() {
+      localStorage.clear();
     });
   </script>
 
