@@ -1,6 +1,8 @@
 angular.module('flash-card')
 
-.controller('LoginCtrl', function(loginSvc, $location){
+.controller('LoginCtrl', function(loginSvc, $location, $http){
+
+  // login should clear localStorage
 
   this.login = function() {
     loginName = this.loginName;
@@ -9,7 +11,13 @@ angular.module('flash-card')
       if (res.error) {
         console.error(res.error);
       } else if (res.data === 'OK') {
-        window.currentUser = loginName;
+        localStorage.clear();
+        localStorage.setItem('currentUser', loginName);
+        $http.get('http://localhost:3000/decks', {params: {username: loginName}}).then(function(r) {
+          console.log(r);
+          localStorage.setItem('decks', r.data);
+        });
+        // this above http isn't being called?
         $location.path('/app');
       } else if (res.data === 'NO') {
         alert('incorrect username or password, please try again');
@@ -21,7 +29,6 @@ angular.module('flash-card')
     accName = this.accName;
     accPw = this.accPw;
     accVerifyPw = this.accVerifyPw;
-    console.log(accName);
     loginSvc.signup(accName, accPw, function(res) {
       if (this.accPw !== this.accVerifyPw) {
         alert('your passwords do not match; please check and re-try');
@@ -30,7 +37,8 @@ angular.module('flash-card')
       if (res.error) {
         console.error(res.error);
       } else if (res.data === 'OK') {
-        window.currentUser = this.accName;
+        localStorage.clear();
+        localStorage.setItem('currentUser', accName);
         $location.path('/app');
       } else if (res.data === 'NO') {
         alert('username taken');
@@ -68,3 +76,12 @@ angular.module('flash-card')
 
 });
 
+
+
+// PLAN:
+
+// ON LOGIN, GET ALL DECKS AND SAVE TO LOCAL STORAGE
+// THE HOME PAGE CAN SET $CTRL.DATA TO THE DECKS SAVED IN LOCAL STORAGE
+
+// WE HAVE TO MAKE SURE TO INCLUDE A CALL TO THE DATABASE WHEN SAVING A DECK,
+// IN ORDER TO UPDATE WHAT WE HAVE AS 'DECKS' IN LOCAL STORAGE

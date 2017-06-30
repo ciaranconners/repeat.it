@@ -1,33 +1,35 @@
 angular.module('flash-card')
 .controller('CreatePageCtrl', function($http, $location){
-  this.newDeck = {};
+  var currentUser = localStorage.getItem('currentUser');
+  this.newDeck = {username: currentUser};
   this.newDeck.cards = [];
   this.newCard = {};
 
+
   this.addCard = function(newCard) {
     if(!newCard.front || !newCard.back) {
-      alert("Please fill out a card")
+      alert("Please fill out a card");
     } else {
       this.newDeck.cards.push(newCard);
       this.newCard = {};
     }
-  }
+  };
 
   this.handleSave = function() {
     if(!this.newDeck.deckname) {
-      alert("Please enter a deck name")
+      alert("Please enter a deck name");
     } else {
       console.log(this.newDeck);
       $http.post('/decks', this.newDeck).then(function() {
-        $location.path('/');
+        $location.path('/app');
       });
     }
-  }
+  };
 
   this.deleteCard = function(card) {
     var i = this.newDeck.cards.indexOf(card);
     this.newDeck.cards.splice(i,1);
-  }
+  };
 
 })
 .component('createPage', {

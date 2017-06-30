@@ -8,10 +8,20 @@ var bodyParser = require('body-parser');
 
 //retrieve all decks
 router.get('/decks', function(req, res) {
-  Deck.find({}).then(function(decks) {res.json(decks);});
+  var username = req.query.username;
+  Deck.find({username: username})
+    .then(function(err, decks) {
+      if (err) {
+        console.error(err);
+      } else {
+        console.log('query successful, sending decks to client', decks);
+        res.status(200).json(decks);
+      }
+    });
 });
 
 router.post('/decks', function(req, res) {
+  console.log('POST', req.body);
   Deck.create(req.body).then(function(deck) {
     res.json(deck);
   });

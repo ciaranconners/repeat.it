@@ -3,9 +3,9 @@
     <h4>CREATE A NEW ACCOUNT</h4>
     <input id="accName" type="text" placeholder="choose a username" ng-model="login.accName"/>
     <br />
-    <input id="accPw" type="text" placeholder="password" ng-model="login.accPw"/>
+    <input id="accPw" type="password" placeholder="password" ng-model="login.accPw"/>
     <br />
-    <input id="accVerifyPw" type="text" placeholder="verify password" ng-model="login.accVerifyPw"/>
+    <input id="accVerifyPw" type="password" placeholder="verify password" ng-model="login.accVerifyPw"/>
     <br />
     <button ng-click="login.signup()">SIGN UP</button>
   </form>
@@ -14,9 +14,9 @@
 
   <form class="loginForm">
     <h4>LOGIN</h4>
-    <input id="loginName" type="text" placeholder="username" ng-model="login.loginName"/>
+    <input id="loginName" type="password" placeholder="username" ng-model="login.loginName"/>
     <br />
-    <input id="loginPw" type="text" placeholder="password" ng-model="login.loginPw"/>
+    <input id="loginPw" type="password" placeholder="password" ng-model="login.loginPw"/>
     <br />
     <button ng-click="login.login()">LOG IN</button>
   </form>
