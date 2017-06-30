@@ -6,7 +6,7 @@ var db = require('../config');
 
 var DeckSchema = new Schema({
   deckname: String,
-  owner: userFile.UserSchema,
+  username: String,
   public: {
     type: Boolean,
     default: false
