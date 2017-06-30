@@ -20,10 +20,16 @@ angular.module('flash-card')
   }
 
   this.handleSave = function() {
-    var id = this.deck._id;
-    $http.put('/decks/' + id, this.deck).then(function() {
-      $location.path('/');
-    });
+
+    if(!this.deck.deckname) {
+      alert("Please enter a deck name")
+    } else {
+      var id = this.deck._id;
+      $http.put('/decks/' + id, this.deck).then(function() {
+        $location.path('/');
+      });
+    }
+
   }
 
   this.deleteCard = function(card) {
