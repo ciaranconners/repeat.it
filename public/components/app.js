@@ -1,5 +1,5 @@
 angular.module('flash-card')
-.controller('AppCtrl', function($http) {
+.controller('AppCtrl', function($http, $location) {
   var that = this;
 
   var currentUser = localStorage.getItem('currentUser');
@@ -19,10 +19,11 @@ angular.module('flash-card')
     var id = deck._id;
     $http.delete('/decks/' + id).then(function() {
       $http.get('/decks').then(function(res) {
-        that.data = res.data;
+        that.decks = res.data;
       });
     });
   };
+
   this.setDecks();
 })
 .component('app', {

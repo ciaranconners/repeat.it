@@ -49,7 +49,7 @@ router.put('/decks/', function(req, res) {
 
 router.delete('/decks/:id', function(req, res) {
   Deck.findByIdAndRemove({_id: req.params.id}).then(function(deletedDeck) {
-    res.json(deletedDeck);
+    res.status(200).send('deck deleted');
   });
 });
 

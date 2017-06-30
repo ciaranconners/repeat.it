@@ -56,19 +56,20 @@
       $(".navbar-collapse a").click(function(){
         $(".navbar-collapse").collapse("hide");
       });
+      localStorage.clear();
     });
 
 
     //listeners for global navigation buttons:
     $('#home-btn').on('click', function() {
       if (localStorage.length === 0) {
-        alert('you\'re not logged in currently but feel free to play around. your decks will not be saved.');
+        alert('you\'re not logged in currently but feel free to play around. your decks will not be saved to your account, but will be available to all unregistered users.');
       }
     });
 
     $('#create-btn').on('click', function() {
       if (localStorage.length === 0) {
-        alert('you\'re not logged in currently but feel free to play around. your decks will not be saved.');
+        alert('you\'re not logged in currently but feel free to play around. your decks will not be saved to your account, but will be available to all unregistered users.');
       }
     });
 
