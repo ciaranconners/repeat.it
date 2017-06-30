@@ -1,17 +1,23 @@
 <div ng-controller="StudyCtrl as study">
 
-  <div id="currentCard">
+  <div class="flashcard" ng-click="study.handleFlip()">
     <h1 id="cardbody" ng-if="study.front">{{ study.current.front }}</h1>
     <h1 id="cardbody" ng-if="!study.front">{{ study.current.back }}</h1>
   </div>
 
-  <button class="studybutton" id="flip" ng-click="study.handleFlip()">Flip card</button>
-  <br>
-  <button class="studybutton" id="right" ng-click="study.handleRight()" ng-if="!study.front">Right</button>
-  <button class="studybutton" id="wrong" ng-click="study.handleWrong()" ng-if="!study.front">Wrong</button>
-  <br>
-  <button class="studybutton" id="previous" ng-disabled="!study.showPrev" ng-click="study.handlePrev()">Previous card</button>
-  <button class="studybutton" id="next" ng-disabled="!study.showNext" ng-click="study.handleNext()">Next card</button>
-  <br>
-  <button class="studybutton" id="save" ng-click="study.handleSave()">Save your progress</button>
+<!--   <button class="studybutton" id="flip" ng-click="study.handleFlip()">Flip card</button> -->
+  <div class="studyNavigation">
+    <ul class="progressRatingButtons">
+    <li ng-if="!study.front">How did you do on this question?</li>
+    <li><button class="studybutton" id="right" ng-click="study.handleRight()" ng-if="!study.front">Right</button></li>
+    <li><button class="studybutton" id="wrong" ng-click="study.handleWrong()" ng-if="!study.front">Wrong</button></li>
+    </ul>
+    <ul class="skipCardButtons">
+    <li><button class="studybutton" id="previous" ng-disabled="!study.showPrev" ng-click="study.handlePrev()">Previous card</button></li>
+    <li><button class="studybutton" id="next" ng-disabled="!study.showNext" ng-click="study.handleNext()">Next card</button></li>
+    </ul>
+    <ul>
+    <li><button class="studybutton" id="save" ng-click="study.handleSave()">Save and quit</button></li>
+    </ul>
+  </div>
 </div>

@@ -38,6 +38,18 @@ li {
   margin-top: 10px;
 }
 
+.progressRatingButtons li {
+  display: inline-block;
+}
+
+.skipCardButtons li {
+  display: inline-block;
+}
+
+.studyNavigation {
+  margin: 0 auto;
+  width: 50%;
+}
 
 
 /*h1, h2{
