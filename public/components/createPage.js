@@ -19,9 +19,13 @@ angular.module('flash-card')
     if(!this.newDeck.deckname) {
       alert("Please enter a deck name");
     } else {
-      console.log(this.newDeck);
-      $http.post('/decks', this.newDeck).then(function() {
-        $location.path('/app');
+      console.log('NEW DECK', this.newDeck);
+      // post goes back to with user info
+      $http.post('/decks?username=' + localStorage.getItem('currentUser'), this.newDeck).then(function() {
+        $http.get('/decks', {params: {username: loginName}}).then(function(response) {
+          localStorage.setItem('decks', JSON.stringify(response.data));
+          $location.path('/app');
+        });
       });
     }
   };

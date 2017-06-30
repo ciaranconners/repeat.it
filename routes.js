@@ -6,13 +6,20 @@ var Deck = require('./db/models/deck');
 
 var bodyParser = require('body-parser');
 
+router.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  next();
+});
+
 //retrieve all decks
 router.get('/decks', function(req, res) {
   var username = req.query.username;
   Deck.find({username: username})
     .then(function(err, decks) {
-      if (err) {
+      if (err) { // this is not an error per se but actually a deck
         console.error(err);
+        res.status(202).send(err);
       } else {
         console.log('query successful, sending decks to client', decks);
         res.status(200).json(decks);
@@ -21,15 +28,22 @@ router.get('/decks', function(req, res) {
 });
 
 router.post('/decks', function(req, res) {
-  console.log('POST', req.body);
+  // console.log('POST', req.body); => CONFIRMS THAT POST GOES THROUGH
   Deck.create(req.body).then(function(deck) {
+    // console.log('DECK', deck); => CONFIRMS THAT DECK IS SAVED SUCCESSFULLY
     res.json(deck);
   });
 });
 
-router.put('/decks/:id', function(req, res) {
-  Deck.findByIdAndUpdate({_id: req.params.id}, req.body, {new:true}).then(function(deck) {
-    res.json(deck);
+router.put('/decks/', function(req, res) {
+  var username = req.body.username;
+  console.log(username);
+  //console.log('USERNAME', username); => confirms that we have correct username serverside
+  console.log('REQ.BODY', req.body);
+  Deck.findOneAndUpdate({username: username}, req.body, {new:true}).then(function(deck) {
+    // res.json(deck);
+    console.log('DECK', deck);
+    res.status(200).send('deck updated');
   });
 });
 

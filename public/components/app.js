@@ -3,11 +3,13 @@ angular.module('flash-card')
   var that = this;
 
   var currentUser = localStorage.getItem('currentUser');
+  var decks = localStorage.getItem('decks');
 
-  // $http.get('/decks', {params: {username: currentUser}}).then(function(res) {
-  //     console.log(res);
-  //     that.data = res.data;
-  // });
+  this.setDecks = function() {
+    that.decks = JSON.parse(decks);
+    console.log('setDecks called');
+    console.log('this.decks: ', that.decks);
+  };
 
   this.getDeck = function(deck){
     localStorage.setItem('currentDeck', JSON.stringify(deck));
@@ -21,7 +23,7 @@ angular.module('flash-card')
       });
     });
   };
-
+  this.setDecks();
 })
 .component('app', {
   controller: 'AppCtrl',
