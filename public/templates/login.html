@@ -2,23 +2,22 @@
   <div class="row">
     <form class="accCreationForm col-xs-12 col-md-6">
       <h4>Create a New Account</h4>
-      <input id="accName" type="text" placeholder="choose a username" ng-model="accName"/>
+      <input id="accName" type="text" placeholder="choose a username" ng-model="login.accName"/>
       <br />
-      <input id="accPw" type="password" placeholder="password" ng-model="accPw"/>
+      <input id="accPw" type="password" placeholder="password" ng-model="login.accPw"/>
       <br />
-      <input id="accVerifyPw" type="password" placeholder="verify password" ng-model="accVerifyPw"/>
+      <input id="accVerifyPw" type="password" placeholder="verify password" ng-model="login.accVerifyPw"/>
       <br />
-      <button class="btn btn-primary">Sign Up</button>
+      <button ng-click="login.signup()" class="btn btn-primary">Sign Up</button>
     </form>
 
     <form class="loginForm col-xs-12 col-md-6">
       <h4>Login</h4>
-      <input id="loginName" type="text" placeholder="username" ng-model="loginName"/>
+      <input id="loginName" type="text" placeholder="username" ng-model="login.loginName"/>
       <br />
-      <input id="loginPw" type="password" placeholder="password" ng-model="loginPw"/>
+      <input id="loginPw" type="password" placeholder="password" ng-model="login.loginPw"/>
       <br />
       <button class="btn btn-primary" ng-click="login.login()">Log In</button>
     </form>
   </div>
 </div>
-

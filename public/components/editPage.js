@@ -25,6 +25,7 @@ angular.module('flash-card')
     }
   };
 
+
   this.deleteCard = function(card) {
     var i = this.deck.cards.indexOf(card);
     this.deck.cards.splice(i,1);

@@ -8,10 +8,20 @@ var bodyParser = require('body-parser');
 
 //retrieve all decks
 router.get('/decks', function(req, res) {
-  Deck.find({}).then(function(decks) {res.json(decks);});
+  var username = req.query.username;
+  Deck.find({username: username})
+    .then(function(err, decks) {
+      if (err) {
+        console.error(err);
+      } else {
+        console.log('query successful, sending decks to client', decks);
+        res.status(200).json(decks);
+      }
+    });
 });
 
 router.post('/decks', function(req, res) {
+  console.log('POST', req.body);
   Deck.create(req.body).then(function(deck) {
     res.json(deck);
   });
@@ -57,34 +67,51 @@ router.delete('/users/:id', function(req, res) {
 /////////
 ////////
 
+var bcrypt = require('bcrypt');
+var saltRounds = 10;
+
 router.post('/login', function(req, res) {
-  UserFile.User.findOne({username: req.body.username}).then(function(user) {
+  UserFile.User.findOne({
+    username: req.body.username
+  }).then(function(user) {
     if (user !== null) {
-      if (user.password === req.body.password) {
-        console.log('user authenticated');
-        res.status(200).send('welcome!');
-      } else {
-        console.log('invalid user/password combo');
-        res.status(200).send('try again');
-      }
+      bcrypt.compare(req.body.password, user.password, function(err, result) {
+        if (result === true) {
+          console.log('user authenticated');
+          res.status(200).json('OK');
+        } else {
+          console.log('invalid user/password combo');
+          res.status(200).json('NO');
+        }
+      });
     } else {
       console.log('invalid username');
-      res.send('invalid username');
+      res.json('NO');
     }
   });
 });
 
 router.post('/signup', function(req, res) {
-  UserFile.User.findOne({username: req.body.username}).then(function(user) {
+  UserFile.User.findOne({
+    username: req.body.username
+  }).then(function(user) {
     if (user === null) {
-      UserFile.User.create({
-        username: req.body.username,
-        password: req.body.password
-      }).then(function(user) {
-        res.status(200).send('welcome!');
+      bcrypt.genSalt(saltRounds, function(err, salt) {
+        bcrypt.hash(req.body.password, salt, function(err, hash) {
+          if (err) {
+            console.error(err);
+          } else {
+            UserFile.User.create({
+              username: req.body.username,
+              password: hash
+            }).then(function(user) {
+              res.status(200).json('OK');
+            });
+          }
+        });
       });
     } else {
-      res.send('username already taken');
+      res.json('NO');
     }
   });
 });

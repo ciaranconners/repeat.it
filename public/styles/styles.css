@@ -48,6 +48,34 @@ td {
   word-wrap: break-word;
 }
 
+.progressRatingButtons li {
+  display: inline-block;
+}
+
+.skipCardButtons li {
+  display: inline-block;
+}
+
+.studyNavigation {
+  margin: 0 auto;
+  width: 50%;
+}
+.studycard {
+  border: 1px solid gray;
+  margin: 0 auto;
+  width: 50%;
+  text-align: center;
+  height: 20em;
+  padding: 6.5em;
+}
+table {
+  table-layout: fixed;
+}
+
+td {
+  word-wrap: break-word;
+}
+
 tr button.buttonInTable {
   display: block;
   margin-left: auto;

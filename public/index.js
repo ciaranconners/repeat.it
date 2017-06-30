@@ -9,6 +9,10 @@ angular.module('flash-card', ['ngRoute'])
 
     $routeProvider.
       when('/', {
+        templateUrl: './templates/login.html',
+        controller: 'LoginCtrl'
+      }).
+      when('/app', {
         templateUrl: './templates/app.html',
         controller: 'AppCtrl'
       }).
