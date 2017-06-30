@@ -25,8 +25,12 @@ angular.module('flash-card')
       alert("Please enter a deck name")
     } else {
       var id = this.deck._id;
-      $http.put('/decks/' + id, this.deck).then(function() {
-        $location.path('/');
+      $http.put('/decks/', this.deck, {params: {username: localStorage.getItem('currentUser')}}).then(function() {
+        $http.get('/decks', {params: {username: localStorage.getItem('currentUser')}}).then(function(response) {
+          console.log('getting decks', response);
+          localStorage.setItem('decks', JSON.stringify(response.data));
+          $location.path('/app');
+        });
       });
     }
 
@@ -41,3 +45,5 @@ angular.module('flash-card')
   controller: 'EditPageCtrl',
   templateUrl: './templates/editPage.html' //calling from index.html
 });
+
+

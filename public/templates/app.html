@@ -2,11 +2,11 @@
   <h3>Choose a deck</h3>
 
   <table class="table table-striped table-bordered table-hover">
-    <tr ng-repeat="item in app.data" class="deck-list-entry">
-      <td>{{ item.deckname }}</td>
-      <td><a href="/study" ng-click="app.getDeck(item)"><button class="buttonInTable btn btn-primary">Study</button></a></td>
-      <td><a href="/edit"><button class="buttonInTable btn btn-info" ng-click="app.getDeck(item)">Edit</button></a></td>
-      <td><button class="buttonInTable btn btn-danger" ng-click="app.handleDelete(item)">Delete</button></td>
+    <tr ng-repeat="deck in app.decks track by $index" class="deck-list-entry">
+      <td>{{ deck.deckname }}</td>
+      <td><a href="/study" ng-click="app.getDeck(deck)"><button class="buttonInTable btn btn-primary">Study</button></a></td>
+      <td><a href="/edit"><button class="buttonInTable btn btn-info" ng-click="app.getDeck(deck)">Edit</button></a></td>
+      <td><button class="buttonInTable btn btn-danger" ng-click="app.handleDelete(deck)">Delete</button></td>
     </tr>
 
   </table>

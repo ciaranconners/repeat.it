@@ -60,11 +60,12 @@ angular.module('flash-card')
   };
 
   this.handleSave = () => {
-    var id = this.deck._id;
-    this.deck.cards = this.shuffledDeck;
-    $http.put('/decks/' + id, this.deck).then(function() {
-      $location.path('/');
-    });
+    // var id = this.deck._id;
+    // this.deck.cards = this.shuffledDeck;
+    // $http.put('/decks/' + id, this.deck).then(function() {
+    //   $location.path('/');
+    // });
+    $location.path('/app');
   };
 
 });

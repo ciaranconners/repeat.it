@@ -2,23 +2,20 @@ angular.module('flash-card')
 
 .controller('LoginCtrl', function(loginSvc, $location, $http){
 
-  // login should clear localStorage
-
   this.login = function() {
+    var that = this;
     loginName = this.loginName;
     loginPw = this.loginPw;
     loginSvc.login(loginName, loginPw, function(res) {
       if (res.error) {
         console.error(res.error);
       } else if (res.data === 'OK') {
-        localStorage.clear();
-        localStorage.setItem('currentUser', loginName);
-        $http.get('http://localhost:3000/decks', {params: {username: loginName}}).then(function(r) {
-          console.log(r);
-          localStorage.setItem('decks', r.data);
+        $http.get('/decks', {params: {username: loginName}}).then(function(response) {
+          localStorage.clear();
+          localStorage.setItem('currentUser', loginName);
+          localStorage.setItem('decks', JSON.stringify(response.data));
+          $location.path('/app');
         });
-        // this above http isn't being called?
-        $location.path('/app');
       } else if (res.data === 'NO') {
         alert('incorrect username or password, please try again');
       }
@@ -32,13 +29,13 @@ angular.module('flash-card')
     loginSvc.signup(accName, accPw, function(res) {
       if (this.accPw !== this.accVerifyPw) {
         alert('your passwords do not match; please check and re-try');
-      }
-
-      if (res.error) {
+        $location.path('/login');
+      } else if (res.error) {
         console.error(res.error);
       } else if (res.data === 'OK') {
         localStorage.clear();
         localStorage.setItem('currentUser', accName);
+        localStorage.setItem('decks', {});
         $location.path('/app');
       } else if (res.data === 'NO') {
         alert('username taken');
@@ -62,7 +59,6 @@ angular.module('flash-card')
         callback(response);
       });
   };
-
   this.signup = function(username, password, callback) {
     var url = 'http://localhost:3000/signup';
     $http.post(url, JSON.stringify({username: username, password:password}))
@@ -73,7 +69,6 @@ angular.module('flash-card')
         callback(response);
       });
   };
-
 });
 
 
