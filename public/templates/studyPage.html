@@ -1,6 +1,6 @@
 <div ng-controller="StudyCtrl as study">
 
-  <div id="currentCard">
+  <div class="studycard">
     <h1 id="cardbody" ng-if="study.front">{{ study.current.front }}</h1>
     <h1 id="cardbody" ng-if="!study.front">{{ study.current.back }}</h1>
   </div>

@@ -40,6 +40,14 @@ li {
   margin-top: 10px;
 }
 
+.studycard {
+  border: 1px solid gray;
+  margin: 0 auto;
+  width: 50%;
+  text-align: center;
+  height: 20em;
+  padding: 6.5em;
+}
 table {
   table-layout: fixed;
 }
