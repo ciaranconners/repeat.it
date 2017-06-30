@@ -40,6 +40,14 @@ li {
   margin-top: 10px;
 }
 
+table {
+  table-layout: fixed;
+}
+
+td {
+  word-wrap: break-word;
+}
+
 .progressRatingButtons li {
   display: inline-block;
 }
