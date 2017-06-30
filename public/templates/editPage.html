@@ -1,26 +1,45 @@
 <div ng-controller="EditPageCtrl as edit">
-<h1>DECK NAME: <input ng-model="edit.deck.deckname"></h1>
 
-<div>
-  <individualcard></individualcard>
-   <!--the above line references a to-be-made Angular component  -->
-   <createform>
-    <label class="left-edit">Front<input ng-model="edit.newCard.front" required ></label><br>
-    <label class="right-edit">Back<input ng-keyup="$event.keyCode == 13 && edit.addCard(edit.newCard)" ng-model="edit.newCard.back" required ></label><br>
-    <button ng-click="edit.addCard(edit.newCard)">Add Card</button>
-  </createform>
-</div>
+  <div class="container">
+  <h3>DECK NAME: <input ng-model="edit.deck.deckname" /></h3>
 
-<div>
-  <cardlist ng-repeat="card in edit.deck.cards" >
+    <div class="row">
+      <div class="col-xs-5 flashcard">
+        <h4>Question</h4>
+        <hr>
+        <textarea placeholder="Enter a question" ng-model="edit.newCard.front"></textarea>
+      </div>
 
-  <editform>
-    <label class="left-edit">Front<input ng-model="card.front"></label><br>
-    <label class="right-edit">Back<input ng-model="card.back"></label><br>
-    <button ng-click="edit.deleteCard(card)">Delete card</button>
-  </editform>
-  </cardlist>
-</div>
+      <div class="col-xs-5 flashcard">
+        <h4>Answer</h4>
+        <hr>
+        <textarea placeholder="Enter the answer" ng-keyup="$event.keyCode == 13 && edit.addCard(edit.newCard)" ng-model="edit.newCard.back"></textarea>
+      </div>
+    </div>
 
-<button type="button" ng-click="edit.handleSave()">Click to Save the Deck</button>
+    <button class="btn btn-primary" ng-click="edit.addCard(edit.newCard)">Add card</button>
+
+    <hr> <!-- Start of list of currently made cards -->
+
+    <div ng-repeat="card in edit.deck.cards" >
+      <div class="row">
+        <div class="col-xs-5 flashcard">
+          <h4>Question</h4>
+          <hr>
+          <textarea placeholder="Enter a question" ng-model="card.front"></textarea>
+        </div>
+
+        <div class="col-xs-5 flashcard">
+          <h4>Answer</h4>
+          <hr>
+          <textarea placeholder="Enter the answer" ng-model="card.back"></textarea>
+        </div>
+      </div>
+
+      <button class="btn btn-danger" ng-click="edit.deleteCard(card)">Delete card</button>
+
+    </div> <!-- end ng-repeat div -->
+
+    <button class="btn btn-primary savedeckbtn" type="button" ng-click="edit.handleSave()">Click to save the deck</button>
+  </div>
 </div>
