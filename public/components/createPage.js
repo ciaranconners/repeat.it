@@ -22,7 +22,7 @@ angular.module('flash-card')
       console.log('NEW DECK', this.newDeck);
       // post goes back to with user info
       $http.post('/decks?username=' + localStorage.getItem('currentUser'), this.newDeck).then(function() {
-        $http.get('/decks', {params: {username: loginName}}).then(function(response) {
+        $http.get('/decks', {params: {username: localStorage.getItem('currentUser')}}).then(function(response) {
           localStorage.setItem('decks', JSON.stringify(response.data));
           $location.path('/app');
         });

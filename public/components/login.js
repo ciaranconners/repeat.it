@@ -11,7 +11,7 @@ angular.module('flash-card')
         console.error(res.error);
       } else if (res.data === 'OK') {
         $http.get('/decks', {params: {username: loginName}}).then(function(response) {
-          localStorage.clear();
+          // localStorage.clear();
           localStorage.setItem('currentUser', loginName);
           localStorage.setItem('decks', JSON.stringify(response.data));
           $location.path('/app');
@@ -33,7 +33,7 @@ angular.module('flash-card')
       } else if (res.error) {
         console.error(res.error);
       } else if (res.data === 'OK') {
-        localStorage.clear();
+        // localStorage.clear();
         localStorage.setItem('currentUser', accName);
         localStorage.setItem('decks', {});
         $location.path('/app');
