@@ -16,7 +16,7 @@ angular.module('flash-card')
   this.handleSave = function() {
 
     if(!this.deck.deckname) {
-      alert("Please enter a deck name")
+      alert("Please enter a deck name");
     } else {
       var id = this.deck._id;
       $http.put('/decks/', this.deck, {params: {username: localStorage.getItem('currentUser')}}).then(function() {
@@ -24,7 +24,7 @@ angular.module('flash-card')
           console.log('getting decks', response);
           localStorage.setItem('decks', JSON.stringify(response.data));
           $location.path('/app');
-        });
+        }, function(err) {console.error(err);});
       });
     }
   };
