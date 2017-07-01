@@ -21,26 +21,14 @@ angular.module('flash-card')
     if(!this.deck.deckname) {
       alert("Please enter a deck name");
     } else {
-
-      console.log('this.deck----(23)', this.deck);
       var id = this.deck._id;
-      console.log('id----(25)', id);
-      console.log('current user----(26)', localStorage.getItem('currentUser'));
-      console.log('this.deck.username (27)', this.deck.username);
-
       $http.put('/decks/', this.deck, {params: {username: localStorage.getItem('currentUser')}}).then(function() {
-
         $http.get('/decks', {params: {username: localStorage.getItem('currentUser')}}).then(function(response) {
-          console.log('current user----(31)', localStorage.getItem('currentUser'));
-
           console.log('getting decks', response);
           localStorage.setItem('decks', JSON.stringify(response.data));
           $location.path('/app');
         }, function(err) {console.error('handleSave, EDIT', err);});
       }, function(err) {console.error(err);});
-
-
-
     }
   };
 
