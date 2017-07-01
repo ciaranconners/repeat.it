@@ -1,5 +1,5 @@
 angular.module('flash-card')
-.controller('AppCtrl', function($http, $location, $route, $timeout) {
+.controller('AppCtrl', function($http, $timeout) {
   var that = this;
 
   var currentUser = localStorage.getItem('currentUser');
@@ -17,7 +17,9 @@ angular.module('flash-card')
     var id = deck._id;
     $http.delete('/decks/' + id).then(function() {
       $http.get('/decks', {params:{username: currentUser}}).then(function(res) {
+        localStorage.setItem('decks', JSON.stringify(res.data));
         that.decks = res.data;
+        console.log('inside handle delete', localStorage.getItem('decks'));
       }, function(error) {console.error(error);});
     }, function(error) {console.error(error);});
   };
