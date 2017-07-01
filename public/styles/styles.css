@@ -56,6 +56,14 @@ td {
   clear: both;
 }
 
+.divParent {
+  justify-content: flex-end;
+}
+
+.divParent button {
+  min-width: 111px;
+}
+
 hr {
   clear: both;
 }
