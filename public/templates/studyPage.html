@@ -1,16 +1,18 @@
 <div ng-controller="StudyCtrl as study">
 
-  <div class="panel panel-default" ng-click="study.handleFlip()">
+  <div class="flip">
+    <div class="card panel panel-default" ng-class="{'flipped':study.flipped}" ng-click="study.handleFlip()">
 
-    <div class="studycard panel-body" ng-if="study.front"><h1>{{ study.current.front }}</h1></div>
-    <div class="studycard panel-body" ng-if="!study.front"><h1>{{ study.current.back }}</h1></div>
+      <div class="studycard face front panel-body" ng-if="study.front"><h1>{{ study.current.front }}</h1></div>
+      <div class="studycard face back panel-body" ng-if="!study.front"><h1>{{ study.current.back }}</h1></div>
+    </div>
   </div>
 
   <!-- <div class="row">
     <div class="text-center col-xs-4">
       <div class="btn-group" role="group">
-      <button type="button" class="btn btn-default btn-success" ng-click="study.handleRight()" ng-if="!study.front">Right</button>
-      <button type="button" class="btn btn-default btn-danger" ng-click="study.handleWrong()" ng-if="!study.front">Wrong</button>
+      <button type="button" class="btn btn-default btn-success" ng-click="study.handleRight()" ng-if="false">Right</button>
+      <button type="button" class="btn btn-default btn-danger" ng-click="study.handleWrong()" ng-if="false">Wrong</button>
       </div>
     </div> -->
     <div class="divParent">

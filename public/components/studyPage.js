@@ -29,6 +29,7 @@ angular.module('flash-card')
 
   this.counter = 0;
   this.front = true;
+  this.flipped = false;
   this.current = this.shuffledDeck[0];
   this.showPrev = false;
 
@@ -39,6 +40,7 @@ angular.module('flash-card')
     this.showPrev = true;
     this.counter++;
     this.front = true;
+    this.flipped = false;
     this.current = this.shuffledDeck[this.counter];
   };
 
@@ -54,6 +56,7 @@ angular.module('flash-card')
 
   this.handleFlip = () => {
     this.front = !this.front;
+    this.flipped = !this.flipped;
   };
 
   this.handleRight = () => {
@@ -65,11 +68,7 @@ angular.module('flash-card')
   };
 
   this.handleSave = () => {
-    // var id = this.deck._id;
-    // this.deck.cards = this.shuffledDeck;
-    // $http.put('/decks/' + id, this.deck).then(function() {
-    //   $location.path('/');
-    // });
+    var id = this.deck._id;
     var that = this;
     this.shuffledDeck.forEach(function(card) {
       for (var i = 0; i < that.deck.cards.length; i++) {
@@ -78,7 +77,9 @@ angular.module('flash-card')
         }
       }
     });
-    $location.path('/app');
+    $http.put('/decks/', this.deck).then(function() {
+      $location.path('/app');
+    });
   };
 
 });

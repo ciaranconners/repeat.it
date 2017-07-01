@@ -98,3 +98,45 @@ form > * {
   padding: 4px;
   margin: 8px;
 }
+
+.flip {
+    position: relative;
+    margin: 0 auto;
+    cursor: pointer;
+/*     background-color: grey; */
+}
+
+.flip .card.flipped {
+  transition: transform 0.5s linear;
+  transform-origin: center;
+  transform-style: preserve-3d;
+  transform: rotateY(180deg);
+  margin: 0 auto;
+  z-index: 1;
+}
+
+.flip .card {
+  transition: transform 0.5s linear;
+  transform-origin: center;
+  transform-style: preserve-3d;
+  margin: 0 auto;
+  width: 50%;
+}
+
+.flip .card .face {
+  position: absolute;
+  z-index: 2;
+  width: 100%;
+}
+
+.flip .card .front {
+  position: relative;
+  -webkit-backface-visibility: hidden;
+/*  z-index: 1;
+*/}
+
+.flip .card .back {
+  transform: rotateY(-180deg);
+  -webkit-backface-visibility: hidden;
+  position: relative;
+}
