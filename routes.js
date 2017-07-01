@@ -37,19 +37,18 @@ router.post('/decks', function(req, res) {
 
 router.put('/decks/', function(req, res) {
   var username = req.body.username;
+  var deckname = req.body.deckname;
   console.log(username);
-  //console.log('USERNAME', username); => confirms that we have correct username serverside
-  console.log('REQ.BODY', req.body);
-  Deck.findOneAndUpdate({username: username}, req.body, {new:true}).then(function(deck) {
-    // res.json(deck);
-    console.log('DECK', deck);
+  console.log(deckname);
+
+  Deck.findOneAndUpdate({username: username, deckname: deckname}, req.body, {new:true}).then(function(deck) {
     res.status(200).send('deck updated');
   });
 });
 
 router.delete('/decks/:id', function(req, res) {
   Deck.findByIdAndRemove({_id: req.params.id}).then(function(deletedDeck) {
-    res.json(deletedDeck);
+    res.status(200).send('deck deleted');
   });
 });
 

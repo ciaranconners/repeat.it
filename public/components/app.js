@@ -1,5 +1,5 @@
 angular.module('flash-card')
-.controller('AppCtrl', function($http) {
+.controller('AppCtrl', function($http, $location) {
   var that = this;
 
   var currentUser = localStorage.getItem('currentUser');
@@ -18,11 +18,13 @@ angular.module('flash-card')
   this.handleDelete = function(deck) {
     var id = deck._id;
     $http.delete('/decks/' + id).then(function() {
-      $http.get('/decks').then(function(res) {
-        that.data = res.data;
-      });
-    });
+      $http.get('/decks', {params:{username: currentUser}}).then(function(res) {
+        that.decks = res.data;
+      }, function(error) {console.error(error);});
+      // we need to include a user identifier with the get request
+    }, function(error) {console.error(error);});
   };
+
   this.setDecks();
 })
 .component('app', {

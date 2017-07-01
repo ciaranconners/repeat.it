@@ -1,26 +1,30 @@
 <div ng-controller="StudyCtrl as study">
 
+  <div class="panel panel-default" ng-click="study.handleFlip()">
 
-  <div class="flashcard" ng-click="study.handleFlip()">
-
-<!--   <div class="studycard"> -->
-    <h1 id="cardbody" ng-if="study.front">{{ study.current.front }}</h1>
-    <h1 id="cardbody" ng-if="!study.front">{{ study.current.back }}</h1>
+    <div class="studycard panel-body" ng-if="study.front"><h1>{{ study.current.front }}</h1></div>
+    <div class="studycard panel-body" ng-if="!study.front"><h1>{{ study.current.back }}</h1></div>
   </div>
 
-<!--   <button class="studybutton" id="flip" ng-click="study.handleFlip()">Flip card</button> -->
-  <div class="studyNavigation">
-    <ul class="progressRatingButtons">
-    <li ng-if="!study.front">How did you do on this question?</li>
-    <li><button class="studybutton" id="right" ng-click="study.handleRight()" ng-if="!study.front">Right</button></li>
-    <li><button class="studybutton" id="wrong" ng-click="study.handleWrong()" ng-if="!study.front">Wrong</button></li>
-    </ul>
-    <ul class="skipCardButtons">
-    <li><button class="studybutton" id="previous" ng-disabled="!study.showPrev" ng-click="study.handlePrev()">Previous card</button></li>
-    <li><button class="studybutton" id="next" ng-disabled="!study.showNext" ng-click="study.handleNext()">Next card</button></li>
-    </ul>
-    <ul>
-    <li><button class="studybutton" id="save" ng-click="study.handleSave()">Save and quit</button></li>
-    </ul>
+  <div class="row">
+    <div class="text-center col-xs-4">
+      <div class="btn-group" role="group">
+      <button type="button" class="btn btn-default btn-success" ng-click="study.handleRight()" ng-if="!study.front">Right</button>
+      <button type="button" class="btn btn-default btn-danger" ng-click="study.handleWrong()" ng-if="!study.front">Wrong</button>
+      </div>
+    </div>
+
+    <div class="text-center col-xs-4">
+      <div class="btn-group" role="group">
+      <button type="button" class="btn btn-default btn-info" id="previous" ng-disabled="!study.showPrev" ng-click="study.handlePrev()">Previous card</button>
+      <button type="button" class="btn btn-default btn-primary" id="next" ng-disabled="!study.showNext" ng-click="study.handleNext()">Next card</button>
+      </div>
+    </div>
+
+    <div class="text-center col-xs-4">
+      <div class="btn-group" role="group">
+        <button type="button" class="btn btn-default" id="save" ng-click="study.handleSave()">Save and quit</button>
+      </div>
+    </div>
   </div>
 </div>

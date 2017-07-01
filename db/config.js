@@ -1,6 +1,8 @@
 var mongoose = require('mongoose');
 
+
 mongooseURI = 'mongodb://localhost/flashcardsdb';
+
 mongoose.connect(mongooseURI);
 
 var db = mongoose.connection;
