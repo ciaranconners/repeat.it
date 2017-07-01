@@ -1,11 +1,8 @@
 angular.module('flash-card')
 .controller('EditPageCtrl', function($http, $location){
-
   this.newCard = {plaintextFront: true, plaintextBack: true};
-
   //***** add more of the default schema ****
   this.deck = JSON.parse(localStorage.getItem('currentDeck'));
-
   this.addCard = function(newCard) {
     if(!newCard.front || !newCard.back) {
       alert("Please fill out a card");
@@ -15,9 +12,7 @@ angular.module('flash-card')
     }
     console.log('this.deck----', this.deck);
   };
-
   this.handleSave = function() {
-
     if(!this.deck.deckname) {
       alert("Please enter a deck name");
     } else {
@@ -31,13 +26,10 @@ angular.module('flash-card')
       }, function(err) {console.error(err);});
     }
   };
-
-
   this.deleteCard = function(card) {
     var i = this.deck.cards.indexOf(card);
     this.deck.cards.splice(i,1);
   };
-
   this.moveUp = function(card) {
     var index = this.deck.cards.indexOf(card);
     if(index === 0) {
@@ -48,7 +40,6 @@ angular.module('flash-card')
       this.deck.cards[index] = temp;
     }
   };
-
   this.moveDown = function(card) {
     var index = this.deck.cards.indexOf(card);
     if(index === this.deck.cards.length-1) {
@@ -59,19 +50,14 @@ angular.module('flash-card')
       this.deck.cards[index] = temp;
     }
   };
-
   this.toggleHighlightFront = function(card) {
     card.plaintextFront = !card.plaintextFront;
   };
-
   this.toggleHighlightBack = function(card) {
     card.plaintextBack = !card.plaintextBack;
   };
-
 })
 .component('editPage', {
   controller: 'EditPageCtrl',
   templateUrl: './templates/editPage.html' //calling from index.html
 });
-
-

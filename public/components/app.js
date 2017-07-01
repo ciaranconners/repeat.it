@@ -1,18 +1,14 @@
 angular.module('flash-card')
 .controller('AppCtrl', function($http, $timeout) {
   var that = this;
-
   var currentUser = localStorage.getItem('currentUser');
-
   this.setDecks = function() {
       that.decks = JSON.parse(localStorage.getItem('decks'));
       console.log('setDecks called. this.decks: ', that.decks);
   };
-
   this.getDeck = function(deck){
     localStorage.setItem('currentDeck', JSON.stringify(deck));
   };
-
   this.handleDelete = function(deck) {
     var id = deck._id;
     $http.delete('/decks/' + id).then(function() {
