@@ -65,6 +65,14 @@ angular.module('flash-card')
     // $http.put('/decks/' + id, this.deck).then(function() {
     //   $location.path('/');
     // });
+    var that = this;
+    this.shuffledDeck.forEach(function(card) {
+      for (var i = 0; i < that.deck.cards.length; i++) {
+        if (that.deck.cards[i].front === card.front && that.deck.cards[i].back === card.back) {
+          that.deck.cards[i] = card;
+        }
+      }
+    });
     $location.path('/app');
   };
 
