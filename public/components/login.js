@@ -11,38 +11,51 @@ angular.module('flash-card')
         console.error(res.error);
       } else if (res.data === 'OK') {
         $http.get('/decks', {params: {username: loginName}}).then(function(response) {
-          // localStorage.clear();
           localStorage.setItem('currentUser', loginName);
           localStorage.setItem('decks', JSON.stringify(response.data));
           $location.path('/app');
-        });
+        }, function(error) {console.error(error);});
       } else if (res.data === 'NO') {
-        alert('incorrect username or password, please try again');
+        alert('Incorrect username or password, please try again.');
+        that.loginName = '';
+        that.loginPw = '';
       }
     });
   };
 
   this.signup = function() {
+    var that = this;
     accName = this.accName;
     accPw = this.accPw;
     accVerifyPw = this.accVerifyPw;
     loginSvc.signup(accName, accPw, function(res) {
-      if (this.accPw !== this.accVerifyPw) {
-        alert('your passwords do not match; please check and re-try');
-        $location.path('/login');
+      if (this.accPw !== this.accVerifyPw && res.data === 'NO') {
+        alert('Username taken; please try another username.');
+        that.accName = '';
+        that.accPw = '';
+        that.accVerifyPw = '';
+      }
+      else if (this.accPw !== this.accVerifyPw) {
+        alert('Your passwords do not match; please check and try again.');
+        that.accPw = '';
+        that.accVerifyPw = '';
       } else if (res.error) {
         console.error(res.error);
       } else if (res.data === 'OK') {
-        // localStorage.clear();
         localStorage.setItem('currentUser', accName);
         localStorage.setItem('decks', {});
         $location.path('/app');
       } else if (res.data === 'NO') {
-        alert('username taken');
+        alert('Username taken; please try another username.');
+        that.accName = '';
+        that.accPw = '';
+        that.accVerifyPw = '';
       }
     });
   };
 })
+
+// on signup, if the password don't match AND the username is taken we have to fail twice
 
 .component('login', {
   controller: 'LoginCtrl',

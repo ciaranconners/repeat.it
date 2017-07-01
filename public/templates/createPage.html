@@ -25,18 +25,35 @@
       <div class="row">
         <div class="col-xs-5 flashcard">
           <h4>Question</h4>
+
+          <div class="codeToggleBtn">
+            <button ng-click="create.toggleHighlightFront(card)" ng-class="{'btn': card.plaintextFront, 'btn btn-primary': !card.plaintextFront}">
+              <span class="fa fa-code"></span>
+            </button>
+          </div>
+
           <hr>
           <textarea placeholder="Enter a question" ng-model="card.front"></textarea>
         </div>
 
         <div class="col-xs-5 flashcard">
           <h4>Answer</h4>
+
+          <div class="codeToggleBtn">
+            <button ng-click="create.toggleHighlightBack(card)" ng-class="{'btn': card.plaintextBack, 'btn btn-primary': !card.plaintextBack}">
+              <span class="fa fa-code"></span>
+            </button>
+          </div>
+
           <hr>
           <textarea placeholder="Enter the answer" ng-model="card.back"></textarea>
         </div>
       </div>
 
       <button class="btn btn-danger" ng-click="create.deleteCard(card)">Delete card</button>
+      <button class="btn" ng-click="create.moveUp(card)"><span class="fa fa-angle-up"></span></button>
+      <button class="btn" ng-click="create.moveDown(card)"><span class="fa fa-angle-down"></span></button>
+
 
     </div> <!-- end ng-repeat div -->
 

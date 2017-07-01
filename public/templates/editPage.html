@@ -25,21 +25,36 @@
       <div class="row">
         <div class="col-xs-5 flashcard">
           <h4>Question</h4>
+
+          <div class="codeToggleBtn">
+            <button ng-click="edit.toggleHighlightFront(card)" ng-class="{'btn': card.plaintextFront, 'btn btn-primary': !card.plaintextFront}">
+              <span class="fa fa-code"></span>
+            </button>
+          </div>
+
           <hr>
           <textarea placeholder="Enter a question" ng-model="card.front"></textarea>
         </div>
 
         <div class="col-xs-5 flashcard">
           <h4>Answer</h4>
+
+          <div class="codeToggleBtn">
+            <button ng-click="edit.toggleHighlightBack(card)" ng-class="{'btn': card.plaintextBack, 'btn btn-primary': !card.plaintextBack}">
+              <span class="fa fa-code"></span>
+            </button>
+          </div>
+
           <hr>
           <textarea placeholder="Enter the answer" ng-model="card.back"></textarea>
         </div>
       </div>
 
       <button class="btn btn-danger" ng-click="edit.deleteCard(card)">Delete card</button>
+      <button class="btn" ng-click="edit.moveUp(card)"><span class="fa fa-angle-up"></span></button>
+      <button class="btn" ng-click="edit.moveDown(card)"><span class="fa fa-angle-down"></span></button>
 
-      <button class="btn btn-info" ng-click="edit.moveUp(card)">Move card up</button>
-      <button class="btn btn-warning" ng-click="edit.moveDown(card)">Move card down</button>
+
 
     </div> <!-- end ng-repeat div -->
 

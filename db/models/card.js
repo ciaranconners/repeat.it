@@ -8,7 +8,11 @@ var CardSchema = new Schema({
   progress: Number,
   age: Number,
   effort: Number,
-  plaintext: {
+  plaintextFront: {
+    type: Boolean,
+    default: true
+  },
+  plaintextBack: {
     type: Boolean,
     default: true
   },
