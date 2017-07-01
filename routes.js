@@ -15,6 +15,10 @@ router.use(function(req, res, next) {
 //retrieve all decks
 router.get('/decks', function(req, res) {
   var username = req.query.username;
+  if (req.query.username === 'null') {
+    var username = null;
+  }
+  console.log('username', username);
   Deck.find({username: username})
     .then(function(err, decks) {
       if (err) { // this is not an error per se but actually a deck
