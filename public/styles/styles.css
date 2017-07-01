@@ -57,6 +57,7 @@ td {
 }
 
 .divParent {
+  display: flex;
   justify-content: flex-end;
 }
 
