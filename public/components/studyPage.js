@@ -21,10 +21,15 @@ angular.module('flash-card')
 
   console.log("shuffled deck", this.shuffledDeck);
 
+  if(this.shuffledDeck.length === 1) {
+    this.showNext = false;
+  } else {
+    this.showNext = true;
+  }
+
   this.counter = 0;
   this.front = true;
   this.current = this.shuffledDeck[0];
-  this.showNext = true;
   this.showPrev = false;
 
   this.handleNext = () => {

@@ -90,6 +90,14 @@ form > * {
   margin: 8px;
 }
 
+.divParent {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.divParent button {
+  min-width: 111px;
+}
 
 /*h1, h2{
   font-family: 'Permanent Marker', cursive;
