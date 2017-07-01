@@ -16,7 +16,7 @@ angular.module('flash-card')
           $location.path('/app');
         }, function(error) {console.error(error);});
       } else if (res.data === 'NO') {
-        alert('incorrect username or password, please try again');
+        alert('Incorrect username or password, please try again.');
         that.loginName = '';
         that.loginPw = '';
       }
@@ -30,13 +30,13 @@ angular.module('flash-card')
     accVerifyPw = this.accVerifyPw;
     loginSvc.signup(accName, accPw, function(res) {
       if (this.accPw !== this.accVerifyPw && res.data === 'NO') {
-        alert('username taken');
+        alert('Username taken; please try another username.');
         that.accName = '';
         that.accPw = '';
         that.accVerifyPw = '';
       }
       else if (this.accPw !== this.accVerifyPw) {
-        alert('your passwords do not match; please check and try again');
+        alert('Your passwords do not match; please check and try again.');
         that.accPw = '';
         that.accVerifyPw = '';
       } else if (res.error) {
@@ -46,7 +46,7 @@ angular.module('flash-card')
         localStorage.setItem('decks', {});
         $location.path('/app');
       } else if (res.data === 'NO') {
-        alert('username taken');
+        alert('Username taken; please try another username.');
         that.accName = '';
         that.accPw = '';
         that.accVerifyPw = '';
