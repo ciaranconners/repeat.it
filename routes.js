@@ -40,8 +40,11 @@ router.put('/decks/', function(req, res) {
   console.log(username);
   //console.log('USERNAME', username); => confirms that we have correct username serverside
   console.log('REQ.BODY', req.body);
-  Deck.findOneAndUpdate({username: username}, req.body, {new:true}).then(function(deck) {
+  Deck.findOneAndUpdate({username: username}, req.body, {new:true}).then(function(err, deck) {
     // res.json(deck);
+    // if (err) {
+    //   res.status(200).json('put failed');
+    // }
     console.log('DECK', deck);
     res.status(200).send('deck updated');
   });

@@ -18,10 +18,11 @@ angular.module('flash-card')
   this.handleDelete = function(deck) {
     var id = deck._id;
     $http.delete('/decks/' + id).then(function() {
-      $http.get('/decks').then(function(res) {
+      $http.get('/decks', {params:{username: currentUser}}).then(function(res) {
         that.decks = res.data;
-      });
-    });
+      }, function(error) {console.error(error);});
+      // we need to include a user identifier with the get request
+    }, function(error) {console.error(error);});
   };
 
   this.setDecks();

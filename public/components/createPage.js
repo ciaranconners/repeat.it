@@ -25,7 +25,7 @@ angular.module('flash-card')
         $http.get('/decks', {params: {username: localStorage.getItem('currentUser')}}).then(function(response) {
           localStorage.setItem('decks', JSON.stringify(response.data));
           $location.path('/app');
-        }, function(err) {console.error(err);});
+        }, function(err) {console.error('handleSave, CREATE', err);});
       });
     }
   };

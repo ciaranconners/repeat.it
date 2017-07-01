@@ -15,7 +15,7 @@ angular.module('flash-card')
           localStorage.setItem('currentUser', loginName);
           localStorage.setItem('decks', JSON.stringify(response.data));
           $location.path('/app');
-        });
+        }, function(error) {console.error(error);});
       } else if (res.data === 'NO') {
         alert('incorrect username or password, please try again');
       }

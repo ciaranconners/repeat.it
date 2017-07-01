@@ -6,7 +6,7 @@ angular.module('flash-card')
 
   this.addCard = function(newCard) {
     if(!newCard.front || !newCard.back) {
-      alert("Please fill out a card")
+      alert("Please fill out a card");
     } else {
       this.deck.cards.push(this.newCard);
       this.newCard = {};
@@ -24,8 +24,8 @@ angular.module('flash-card')
           console.log('getting decks', response);
           localStorage.setItem('decks', JSON.stringify(response.data));
           $location.path('/app');
-        }, function(err) {console.error(err);});
-      });
+        }, function(err) {console.error('handleSave, EDIT', err);});
+      }, function(err) {console.error(err);});
     }
   };
 
