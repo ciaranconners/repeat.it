@@ -6,24 +6,25 @@
     <div class="studycard panel-body" ng-if="!study.front"><h1>{{ study.current.back }}</h1></div>
   </div>
 
-  <div class="row">
+  <!-- <div class="row">
     <div class="text-center col-xs-4">
       <div class="btn-group" role="group">
       <button type="button" class="btn btn-default btn-success" ng-click="study.handleRight()" ng-if="!study.front">Right</button>
       <button type="button" class="btn btn-default btn-danger" ng-click="study.handleWrong()" ng-if="!study.front">Wrong</button>
       </div>
-    </div>
-
-    <div class="text-center col-xs-4">
-      <div class="btn-group" role="group">
-      <button type="button" class="btn btn-default btn-info" id="previous" ng-disabled="!study.showPrev" ng-click="study.handlePrev()">Previous card</button>
-      <button type="button" class="btn btn-default btn-primary" id="next" ng-disabled="!study.showNext" ng-click="study.handleNext()">Next card</button>
+    </div> -->
+    <div class="divParent">
+      <div class="text-center col-xs-4">
+        <div class="btn-group" role="group">
+        <button type="button" class="btn btn-default btn-info" id="previous" ng-disabled="!study.showPrev" ng-click="study.handlePrev()">Previous card</button>
+        <button type="button" class="btn btn-default btn-primary" id="next" ng-disabled="!study.showNext" ng-click="study.handleNext()">Next card</button>
+        </div>
       </div>
-    </div>
 
-    <div class="text-center col-xs-4">
-      <div class="btn-group" role="group">
-        <button type="button" class="btn btn-default" id="save" ng-click="study.handleSave()">Save and quit</button>
+      <div class="text-center col-xs-4">
+        <div class="btn-group" role="group">
+          <button type="button" class="btn btn-default" id="save" ng-click="study.handleSave()">Save and quit</button>
+        </div>
       </div>
     </div>
   </div>
