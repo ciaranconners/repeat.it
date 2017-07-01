@@ -1,7 +1,9 @@
 angular.module('flash-card')
 .controller('EditPageCtrl', function($http, $location){
 
-  this.newCard = {};
+  this.newCard = {plaintextFront: true, plaintextBack: true};
+
+  //***** add more of the default schema ****
   this.deck = JSON.parse(localStorage.getItem('currentDeck'));
 
   this.addCard = function(newCard) {
@@ -9,7 +11,7 @@ angular.module('flash-card')
       alert("Please fill out a card")
     } else {
       this.deck.cards.push(this.newCard);
-      this.newCard = {};
+      this.newCard = {plaintextFront: true, plaintextBack: true};
     }
   };
 
@@ -56,6 +58,15 @@ angular.module('flash-card')
       this.deck.cards[index] = temp;
     }
   };
+
+  this.toggleHighlightFront = function(card) {
+    card.plaintextFront = !card.plaintextFront;
+  };
+
+  this.toggleHighlightBack = function(card) {
+    card.plaintextBack = !card.plaintextBack;
+  };
+
 })
 .component('editPage', {
   controller: 'EditPageCtrl',

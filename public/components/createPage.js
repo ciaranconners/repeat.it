@@ -3,7 +3,7 @@ angular.module('flash-card')
   var currentUser = localStorage.getItem('currentUser');
   this.newDeck = {username: currentUser};
   this.newDeck.cards = [];
-  this.newCard = {};
+  this.newCard = {plaintextFront: true, plaintextBack: true};
 
 
   this.addCard = function(newCard) {
@@ -11,7 +11,7 @@ angular.module('flash-card')
       alert("Please fill out a card");
     } else {
       this.newDeck.cards.push(newCard);
-      this.newCard = {};
+      this.newCard = {plaintextFront: true, plaintextBack: true};
     }
   };
 
@@ -33,6 +33,36 @@ angular.module('flash-card')
   this.deleteCard = function(card) {
     var i = this.newDeck.cards.indexOf(card);
     this.newDeck.cards.splice(i,1);
+  };
+
+  this.moveUp = function(card) {
+    var index = this.newDeck.cards.indexOf(card);
+    if(index === 0) {
+      return;
+    } else {
+      var temp = this.newDeck.cards[index - 1];
+      this.newDeck.cards[index - 1] = this.newDeck.cards[index];
+      this.newDeck.cards[index] = temp;
+    }
+  };
+
+  this.moveDown = function(card) {
+    var index = this.newDeck.cards.indexOf(card);
+    if(index === this.newDeck.cards.length-1) {
+      return;
+    } else {
+      var temp = this.newDeck.cards[index + 1];
+      this.newDeck.cards[index + 1] = this.newDeck.cards[index];
+      this.newDeck.cards[index] = temp;
+    }
+  };
+
+  this.toggleHighlightFront = function(card) {
+    card.plaintextFront = !card.plaintextFront;
+  };
+
+  this.toggleHighlightBack = function(card) {
+    card.plaintextBack = !card.plaintextBack;
   };
 
 })
