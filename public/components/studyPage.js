@@ -1,7 +1,6 @@
 angular.module('flash-card')
-.controller('StudyCtrl', function($http, $location) {
+.controller('StudyCtrl', function($http, $location, $timeout) {
 
-  //Implement deck shuffle so user can study cards in random order
   var shuffleDeck = function(deck) {
     for (var i = 0; i < deck.length; i++) {
       var random = Math.floor(Math.random()*(deck.length-i)) + i;
@@ -14,25 +13,20 @@ angular.module('flash-card')
 
   //Grab the entire deck object so we have access to the deck id for saving later
   this.deck = JSON.parse(localStorage.getItem('currentDeck'));
-
-  //Use the shuffle function on the stored card deck
   this.shuffledDeck = shuffleDeck(this.deck.cards);
 
-
-  // console.log("shuffled deck", this.shuffledDeck);
-
+  this.showPrev = false;
   if(this.shuffledDeck.length === 1) {
     this.showNext = false;
   } else {
     this.showNext = true;
   }
 
-  this.counter = 0;
+  this.current = this.shuffledDeck[0];
   this.front = true;
   this.flipped = false;
-  this.current = this.shuffledDeck[0];
-  this.showPrev = false;
 
+  this.counter = 0;
 
   this.handleNext = () => {
     if(this.counter === this.shuffledDeck.length-2) {
@@ -40,43 +34,41 @@ angular.module('flash-card')
     }
     this.showPrev = true;
     this.counter++;
+    this.current = this.shuffledDeck[this.counter];
     this.front = true;
     this.flipped = false;
-    this.current = this.shuffledDeck[this.counter];
 
-    setTimeout(() => {
-    this.highlightingHelperFn();
-  }, 100);
+    $timeout(() => {
+      this.highlightingHelperFn();
+    }, 100);
   };
 
   this.handlePrev = () => {
-    if(this.counter === 1) {
+    if(this.counter - 1 === 0) {
       this.showPrev = false;
     }
     this.showNext = true;
     this.counter--;
-    this.front = true;
     this.current = this.shuffledDeck[this.counter];
+    this.flipped = false;
+    this.front = true;
 
-    setTimeout(() => {
-    this.highlightingHelperFn();
-  }, 100);
+    $timeout(() => {
+      this.highlightingHelperFn();
+    }, 100);
   };
 
   this.handleFlip = () => {
     this.front = !this.front;
     this.flipped = !this.flipped;
-    console.log(this.front);
-    console.log(this.plaintextFront);
-    console.log(this.plaintextBack);
 
-    setTimeout(() => {
-    this.highlightingHelperFn();
-  }, 100);
+    $timeout(() => {
+      this.highlightingHelperFn();
+    }, 100);
   };
 
   this.highlightingHelperFn = () => {
-    if (this.front === true && this.current.plaintextFront === false || this.front === false && this.current.plaintextBack === false ) {
+    if (this.front === true && this.current.plaintextFront === false || this.front === false && this.current.plaintextBack === false) {
       // our logic here
       var card = document.getElementsByClassName("studycard");
       var cardHTML = card[0].childNodes[0];
@@ -132,11 +124,7 @@ angular.module('flash-card')
   };
 
   // initialize the first card to check for whether to highlight
-  setTimeout(() => {
+  $timeout(() => {
     this.highlightingHelperFn();
   }, 300);
 });
-
-
-
-
