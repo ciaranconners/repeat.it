@@ -31,8 +31,10 @@ angular.module('flash-card')
   };
 
   this.deleteCard = function(card) {
-    var i = this.newDeck.cards.indexOf(card);
-    this.newDeck.cards.splice(i,1);
+    if (confirm('Are you sure you want to delete this card?')) {
+      var i = this.newDeck.cards.indexOf(card);
+      this.newDeck.cards.splice(i,1);
+    }
   };
 
   this.moveUp = function(card) {
