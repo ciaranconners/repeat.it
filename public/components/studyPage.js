@@ -28,27 +28,6 @@ angular.module('flash-card')
 
   this.counter = 0;
 
-  // this.resetConditionToInitialState = (fnName) => {
-  //   if (fnName === 'handleNext') {
-  //     if (this.counter === this.shuffledDeck.length - 2) {
-  //       this.showNext = false;
-  //     }
-  //     this.showPrev = true;
-  //     this.counter++;
-  //   } else if (fnName === 'handlePrev') {
-  //     if (this.counter - 1 === 0) {
-  //       this.showPrev = false;
-  //     }
-  //     this.showNext = true;
-  //     this.counter--;
-  //   }
-
-  //   this.front = true;
-  //   this.flipped = false;
-  //   this.current = this.shuffledDeck[this.counter];
-  //   this.highlightingHelperFn(this.current.front);
-  // }
-
   var resetConditionToInitialState = {
     'handleNext' : function (studyControllerVariables) {
       var that = studyControllerVariables;
@@ -78,12 +57,10 @@ angular.module('flash-card')
   }
 
   this.handleNext = () => {
-    // this.resetConditionToInitialState('handleNext');
     resetConditionToInitialState['handleNext'](this);
   };
 
   this.handlePrev = () => {
-    // this.resetConditionToInitialState('handlePrev');
     resetConditionToInitialState['handlePrev'](this);
   };
 
