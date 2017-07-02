@@ -1,4 +1,4 @@
-// 'routings'
+// Angular front-end 'routings'
 
 angular.module('flash-card', ['ngRoute'])
 

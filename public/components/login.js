@@ -59,7 +59,7 @@ angular.module('flash-card')
 
 .component('login', {
   controller: 'LoginCtrl',
-  templateUrl: './templates/login.html' //calling from index.html
+  templateUrl: './templates/login.html' // angular calls this from index.html
 })
 .service('loginSvc', function($http) {
   this.login = function(username, password, callback) {
@@ -83,13 +83,3 @@ angular.module('flash-card')
       });
   };
 });
-
-
-
-// PLAN:
-
-// ON LOGIN, GET ALL DECKS AND SAVE TO LOCAL STORAGE
-// THE HOME PAGE CAN SET $CTRL.DATA TO THE DECKS SAVED IN LOCAL STORAGE
-
-// WE HAVE TO MAKE SURE TO INCLUDE A CALL TO THE DATABASE WHEN SAVING A DECK,
-// IN ORDER TO UPDATE WHAT WE HAVE AS 'DECKS' IN LOCAL STORAGE

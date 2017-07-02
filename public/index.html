@@ -2,11 +2,12 @@
 <html>
 <head>
   <title>Flashcards!</title>
+
+  <!-- AngularJS -->
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-route.js"></script>
-  <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 
-  <!-- Bootstrap requires jQuery for some things -->
+  <!-- Bootstrap (css, js, and jQuery as dependency) -->
   <script
   src="https://code.jquery.com/jquery-3.2.1.min.js"
   integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
@@ -16,13 +17,31 @@
 
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 
+  <!-- Fonts for button icons -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 
-  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css">
+  <!-- Highlight.js library and styles _____________________________________________________________________
+   |     Simply uncomment the code for the style you would like to use. There are a lot more also! You can
+   |     check out https://cdnjs.com/libraries/highlight.js/ for a large list of JS and CSS files
+   |     available. You can also check out https://github.com/isagalaev/highlight.js/tree/master/src/styles
+   |     if you are interested at looking at the specific colors for a specific style. They are unminified
+   |     and easy to read. -->
   <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <!-- <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css"> -->
+  <!-- <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css"> -->
+  <!-- <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/googlecode.min.css"> -->
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/mono-blue.min.css">
+  <!-- <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/school-book.min.css"> -->
+          <!-- Which interestingly uses an image (below). I think MDN does this with their light gray grid -->
+  <!-- <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/school-book.png"> -->
+  <!-- <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/sunburst.min.css"> -->
 
+  <!-- Our stylesheet -->
   <link rel="stylesheet" type="text/css" href="styles/styles.css">
+
+  <!-- Other Fonts -->
   <link href="https://fonts.googleapis.com/css?family=Permanent+Marker|Raleway" rel="stylesheet">
+
   <base href="/">
 </head>
 
@@ -52,60 +71,65 @@
   <div ng-view></div>
 
   <script type="text/javascript">
-    // This function causes the menu to collapse correctly
-    // on small screens
+
     $().ready(function() {
+
+      // This function causes the menu to collapse correctly on small screens
       $(".navbar-collapse a").click(function(){
         $(".navbar-collapse").collapse("hide");
       });
+
       localStorage.clear();
-    });
-    //listeners for global navigation buttons:
-    var warning = 'You\'re not logged in, but feel free to play around. Decks you create will not be saved to your account. Instead, they will be available publicly to all unregistered users.';
-    var serverURL = 'http://localhost:3000/decks';
-    var serverCall = function(callback) {
-      $.ajax({
-        url: serverURL,
-        type: 'GET',
-        data: {
-          username: 'null'
-        },
-        success: function(data) {
-          callback(data);
+
+      // Listeners for global navigation buttons:
+      var warning = 'You\'re not logged in, but feel free to play around. Decks you create will not be saved to your account. Instead, they will be available publicly to all unregistered users.';
+      var serverURL = 'http://localhost:3000/decks';
+      var serverCall = function(callback) {
+        $.ajax({
+          url: serverURL,
+          type: 'GET',
+          data: {
+            username: 'null'
+          },
+          success: function(data) {
+            callback(data);
+          }
+        });
+      };
+
+      $('#logo').on('click', function() {
+        if (localStorage.length === 0) {
+          alert(warning);
+          serverCall(function(data) {
+            console.log('inside serverCall', data);
+            localStorage.setItem('decks', JSON.stringify(data));
+          });
         }
       });
-    };
+      $('#home-btn').on('click', function() {
+        if (localStorage.length === 0) {
+          alert(warning);
+          serverCall(function(data) {
+            console.log('inside serverCall', data);
+            localStorage.setItem('decks', JSON.stringify(data));
+          });
+        }
+      });
+      $('#create-btn').on('click', function() {
+        if (localStorage.length === 0) {
+          alert(warning);
+          serverCall(function(data) {
+            console.log('inside serverCall', data);
+            localStorage.setItem('decks', JSON.stringify(data));
+          });
+        }
+      });
+      $('#logout-btn').on('click', function() {
+        localStorage.clear();
+      });
 
-    $('#logo').on('click', function() {
-      if (localStorage.length === 0) {
-        alert(warning);
-        serverCall(function(data) {
-          console.log('inside serverCall', data);
-          localStorage.setItem('decks', JSON.stringify(data));
-        });
-      }
     });
-    $('#home-btn').on('click', function() {
-      if (localStorage.length === 0) {
-        alert(warning);
-        serverCall(function(data) {
-          console.log('inside serverCall', data);
-          localStorage.setItem('decks', JSON.stringify(data));
-        });
-      }
-    });
-    $('#create-btn').on('click', function() {
-      if (localStorage.length === 0) {
-        alert(warning);
-        serverCall(function(data) {
-          console.log('inside serverCall', data);
-          localStorage.setItem('decks', JSON.stringify(data));
-        });
-      }
-    });
-    $('#logout-btn').on('click', function() {
-      localStorage.clear();
-    });
+
   </script>
 
   <script src="./index.js" ></script>
@@ -116,6 +140,3 @@
   <script src="./components/studyPage.js"></script>
 </body>
 </html>
-
-
-
