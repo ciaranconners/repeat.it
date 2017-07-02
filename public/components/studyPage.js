@@ -28,76 +28,112 @@ angular.module('flash-card')
 
   this.counter = 0;
 
-  this.handleNext = () => {
-    if(this.counter === this.shuffledDeck.length-2) {
-      this.showNext = false;
-    }
-    this.showPrev = true;
-    this.counter++;
-    this.current = this.shuffledDeck[this.counter];
-    this.front = true;
-    this.flipped = false;
+  // this.resetConditionToInitialState = (fnName) => {
+  //   if (fnName === 'handleNext') {
+  //     if (this.counter === this.shuffledDeck.length - 2) {
+  //       this.showNext = false;
+  //     }
+  //     this.showPrev = true;
+  //     this.counter++;
+  //   } else if (fnName === 'handlePrev') {
+  //     if (this.counter - 1 === 0) {
+  //       this.showPrev = false;
+  //     }
+  //     this.showNext = true;
+  //     this.counter--;
+  //   }
 
-    $timeout(() => {
-      this.highlightingHelperFn();
-    }, 100);
+  //   this.front = true;
+  //   this.flipped = false;
+  //   this.current = this.shuffledDeck[this.counter];
+  //   this.highlightingHelperFn(this.current.front);
+  // }
+
+  var resetConditionToInitialState = {
+    'handleNext' : function (studyControllerVariables) {
+      var that = studyControllerVariables;
+      if (that.counter === that.shuffledDeck.length - 2) {
+        that.showNext = false;
+      }
+      that.showPrev = true;
+      that.counter++;
+      this.setToInitialState(studyControllerVariables);
+    },
+    'handlePrev' : function (studyControllerVariables) {
+      var that = studyControllerVariables;
+      if (that.counter - 1 === 0) {
+        that.showPrev = false;
+      }
+      that.showNext = true;
+      that.counter--;
+      this.setToInitialState(studyControllerVariables);
+    },
+    'setToInitialState' : function (studyControllerVariables) {
+      var that = studyControllerVariables;
+      that.front = true;
+      that.flipped = false;
+      that.current = that.shuffledDeck[that.counter];
+      that.highlightingHelperFn(that.current.front);
+    }
+  }
+
+  this.handleNext = () => {
+    // this.resetConditionToInitialState('handleNext');
+    resetConditionToInitialState['handleNext'](this);
   };
 
   this.handlePrev = () => {
-    if(this.counter - 1 === 0) {
-      this.showPrev = false;
-    }
-    this.showNext = true;
-    this.counter--;
-    this.current = this.shuffledDeck[this.counter];
-    this.flipped = false;
-    this.front = true;
-
-    $timeout(() => {
-      this.highlightingHelperFn();
-    }, 100);
+    // this.resetConditionToInitialState('handlePrev');
+    resetConditionToInitialState['handlePrev'](this);
   };
 
   this.handleFlip = () => {
     this.front = !this.front;
     this.flipped = !this.flipped;
 
-    $timeout(() => {
-      this.highlightingHelperFn();
-    }, 100);
+    if (this.front === true && this.flipped === false) {
+      this.highlightingHelperFn(this.current.front);
+    } else {
+      this.highlightingHelperFn(this.current.back);
+    }
   };
 
-  this.highlightingHelperFn = () => {
-    if (this.front === true && this.current.plaintextFront === false || this.front === false && this.current.plaintextBack === false) {
-      // our logic here
-      var card = document.getElementsByClassName("studycard");
-      var cardHTML = card[0].childNodes[0];
-      var content = cardHTML.innerHTML; //the h1 value
+  this.highlightingHelperFn = (flashCardQuestion) => {
+    $timeout(() => {
 
-      var newCodeTag = document.createElement('code');
+      if (this.front === true && this.current.plaintextFront === false || this.front === false && this.current.plaintextBack === false) {
+        // our logic here
+        var card = document.getElementsByClassName("studycard");
+        var cardHTML = card[0].childNodes[0];
+        var content = flashCardQuestion || cardHTML.innerHTML; //the h1 value
 
-      cardHTML.parentNode.insertBefore(newCodeTag, cardHTML); // add code tag in next to h1
-      newCodeTag.innerHTML = content; // copy the content
-      cardHTML.parentNode.removeChild(cardHTML); // remove the h1
+        var newCodeTag = document.createElement('code');
 
-      // now we have a <code>stuff user typed</code> for each item
+        cardHTML.parentNode.insertBefore(newCodeTag, cardHTML); // add code tag in next to h1
+        newCodeTag.innerHTML = content; // copy the content
+        cardHTML.parentNode.removeChild(cardHTML); // remove the h1
 
-      var newPreTag = document.createElement('pre');
-      newCodeTag.parentNode.insertBefore(newPreTag, newCodeTag); // add pre next to code
-      newPreTag.appendChild(newCodeTag); // make code a child of pre
+        // now we have a <code>stuff user typed</code> for each item
 
-      // hopefully we have:
-      // <pre>
-      //   <code>stuff user typed</code>
-      // </pre>
-      //
-      // where the old h1 used to be
+        var newPreTag = document.createElement('pre');
+        newCodeTag.parentNode.insertBefore(newPreTag, newCodeTag); // add pre next to code
+        newPreTag.appendChild(newCodeTag); // make code a child of pre
+        // newCodeTag.parentNode.removeChild(newCodeTag.childNodes[0]); // remove the h1
 
-      // change two quick default styles for this card:
-      newPreTag.parentNode.setAttribute("style", "padding:10px; text-align: left;");
+        // hopefully we have:
+        // <pre>
+        //   <code>stuff user typed</code>
+        // </pre>
+        //
+        // where the old h1 used to be
 
-      hljs.highlightBlock(newPreTag);
-    }
+        // change two quick default styles for this card:
+        newPreTag.parentNode.setAttribute("style", "padding:10px; text-align: left;");
+
+        hljs.highlightBlock(newPreTag);
+      }
+    }, 1);
+
   };
 
   this.handleRight = () => {
@@ -124,7 +160,5 @@ angular.module('flash-card')
   };
 
   // initialize the first card to check for whether to highlight
-  $timeout(() => {
-    this.highlightingHelperFn();
-  }, 300);
+  this.highlightingHelperFn();
 });
