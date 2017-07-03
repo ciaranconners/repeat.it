@@ -14,6 +14,10 @@ li {
   margin: 10px;
 }
 
+::-webkit-scrollbar {
+  display: none;
+}
+
 .flashcard textarea {
   resize: none;
   display: block;
@@ -103,7 +107,6 @@ form > * {
     position: relative;
     margin: 0 auto;
     cursor: pointer;
-/*     background-color: grey; */
 }
 
 .flip .card.flipped {
@@ -132,8 +135,7 @@ form > * {
 .flip .card .front {
   position: relative;
   -webkit-backface-visibility: hidden;
-/*  z-index: 1;
-*/}
+}
 
 .flip .card .back {
   transform: rotateY(-180deg);

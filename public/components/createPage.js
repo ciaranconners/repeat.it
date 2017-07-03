@@ -1,10 +1,10 @@
 angular.module('flash-card')
+
 .controller('CreatePageCtrl', function($http, $location){
   var currentUser = localStorage.getItem('currentUser');
   this.newDeck = {username: currentUser};
   this.newDeck.cards = [];
   this.newCard = {plaintextFront: true, plaintextBack: true};
-
 
   this.addCard = function(newCard) {
     if(!newCard.front || !newCard.back) {
@@ -66,9 +66,9 @@ angular.module('flash-card')
   this.toggleHighlightBack = function(card) {
     card.plaintextBack = !card.plaintextBack;
   };
-
 })
+
 .component('createPage', {
   controller: 'CreatePageCtrl',
-  templateUrl: './templates/createPage.html' //calling from index.html
+  templateUrl: './templates/createPage.html' // angular calls this from index.html
 });
