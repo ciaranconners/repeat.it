@@ -6,7 +6,7 @@ Repeat.io is a web app that allows users to create and study flashcards online. 
 
   - __Product Owner__: James Quillin
   - __Scrum Master__: Sheena Ramirez
-  - __Development Team Members__: Patrick Tang, Junji Otsuka, Ciar&‌aacute;n Conners
+  - __Development Team Members__: Patrick Tang, Junji Otsuka, Ciarán Conners
 
 ## Table of Contents
 
