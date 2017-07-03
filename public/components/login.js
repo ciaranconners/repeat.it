@@ -19,6 +19,7 @@ angular.module('flash-card')
         alert('Incorrect username or password, please try again.');
         that.loginName = '';
         that.loginPw = '';
+        $('#loginName').focus();
       }
     });
   };
@@ -50,6 +51,7 @@ angular.module('flash-card')
         that.accName = '';
         that.accPw = '';
         that.accVerifyPw = '';
+        $('#accName').focus();
       }
     });
   };

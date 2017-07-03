@@ -12,6 +12,7 @@ angular.module('flash-card')
     } else {
       this.newDeck.cards.push(newCard);
       this.newCard = {plaintextFront: true, plaintextBack: true};
+      $('#createQuestionField').focus();
     }
   };
 
