@@ -49,8 +49,6 @@ router.put('/decks/', function(req, res) {
     res.status(200).send('deck updated');
   });
 });
-/////////////////
-////////////////
 
 router.put('/decks/:id', function(req, res) {
   // var username = req.body.username;
@@ -66,24 +64,11 @@ router.put('/decks/:id', function(req, res) {
   );
 });
 
-
-///////////////
-////////////////
-
-
-
-
-
-
-
 router.delete('/decks/:id', function(req, res) {
   Deck.findByIdAndRemove({_id: req.params.id}).then(function(deletedDeck) {
     res.status(200).send('deck deleted');
   });
 });
-
-///////////////////////////
-//////////////////////////
 
 router.get('/users', function(req, res) {
   UserFile.User.find({}).then(function(users) {res.json(users);});
@@ -106,9 +91,6 @@ router.delete('/users/:id', function(req, res) {
     res.json(deletedUser);
   });
 });
-
-/////////
-////////
 
 var bcrypt = require('bcrypt');
 var saltRounds = 10;
