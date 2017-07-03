@@ -1,7 +1,8 @@
 <div ng-controller="CreatePageCtrl as create">
-  <div class="container">
 
-    <h3>DECK NAME: <input placeholder="Enter a deck name" ng-model="create.newDeck.deckname" required /></h3>
+  <div class="container">
+  <h3>DECK NAME: <input placeholder="Enter a deck name" ng-model="create.newDeck.deckname" required /></h3>
+
     <div class="row">
       <div class="col-xs-5 flashcard">
         <h4>Question</h4>
@@ -18,9 +19,9 @@
 
     <button class="btn btn-primary" ng-click="create.addCard(create.newCard)">Add card</button>
 
-    <hr>
+    <hr> <!-- Start of list of currently made cards -->
 
-    <div ng-repeat="card in create.newDeck.cards"> <!-- Start of list of currently made cards -->
+    <div ng-repeat="card in create.newDeck.cards" >
       <div class="row">
         <div class="col-xs-5 flashcard">
           <h4>Question</h4>
@@ -52,9 +53,10 @@
       <button class="btn btn-danger" ng-click="create.deleteCard(card)">Delete card</button>
       <button class="btn" ng-click="create.moveUp(card)"><span class="fa fa-angle-up"></span></button>
       <button class="btn" ng-click="create.moveDown(card)"><span class="fa fa-angle-down"></span></button>
-    </div> <!-- end ng-repeat for currently made cards -->
+
+
+    </div> <!-- end ng-repeat div -->
 
     <button class="btn btn-primary savedeckbtn" type="button" ng-click="create.handleSave()">Click to save the deck</button>
-
   </div>
 </div>

@@ -1,5 +1,7 @@
 <div ng-controller="EditPageCtrl as edit">
+
   <div class="container">
+
   <div>
     <h3>DECK NAME: <input ng-model="edit.deck.deckname"/>
       <i class="fa fa-plus-circle" id="parentOfOnClickShowSavedForUserSide" ng-click="edit.handleEditAndSave(); showme=false; showme=true">
@@ -8,7 +10,6 @@
     </h3>
   </div>
 
-    <h3>DECK NAME: <input ng-model="edit.deck.deckname" /></h3>
     <div class="row">
       <div class="col-xs-5 flashcard">
         <h4>Question</h4>
@@ -25,9 +26,9 @@
 
     <button class="btn btn-primary" ng-click="edit.addCard(edit.newCard)">Add card</button>
 
-    <hr>
+    <hr> <!-- Start of list of currently made cards -->
 
-    <div ng-repeat="card in edit.deck.cards"> <!-- Start of list of currently made cards -->
+    <div ng-repeat="card in edit.deck.cards" >
       <div class="row">
         <div class="col-xs-5 flashcard">
           <h4>Question</h4>
@@ -59,7 +60,10 @@
       <button class="btn btn-danger" ng-click="edit.deleteCard(card)">Delete card</button>
       <button class="btn" ng-click="edit.moveUp(card)"><span class="fa fa-angle-up"></span></button>
       <button class="btn" ng-click="edit.moveDown(card)"><span class="fa fa-angle-down"></span></button>
-    </div> <!-- end ng-repeat for currently made cards -->
+
+
+
+    </div> <!-- end ng-repeat div -->
 
     <button class="btn btn-primary savedeckbtn" type="button" ng-click="edit.handleSave()">Save changes to this deck</button>
 

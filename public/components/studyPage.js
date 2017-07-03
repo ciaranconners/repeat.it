@@ -1,9 +1,6 @@
 angular.module('flash-card')
 .controller('StudyCtrl', function($http, $location, $timeout) {
 
-  //-------------------------------------------------------------------
-  // Initialization
-
   var shuffleDeck = function(deck) {
     for (var i = 0; i < deck.length; i++) {
       var random = Math.floor(Math.random()*(deck.length-i)) + i;
@@ -14,7 +11,7 @@ angular.module('flash-card')
     return deck;
   };
 
-  //Grab entire deck for access to the deck _id property for saving
+  //Grab the entire deck object so we have access to the deck id for saving later
   this.deck = JSON.parse(localStorage.getItem('currentDeck'));
   this.shuffledDeck = shuffleDeck(this.deck.cards);
 
@@ -78,7 +75,6 @@ angular.module('flash-card')
     }
   };
 
-
   this.highlightingHelperFn = (flashCardQuestion) => {
     $timeout(() => {
 
@@ -87,6 +83,7 @@ angular.module('flash-card')
         var card = document.getElementsByClassName("studycard");
         var cardHTML = card[0].childNodes[0];
         var content = flashCardQuestion || cardHTML.innerHTML; //the h1 value
+
         var newCodeTag = document.createElement('code');
 
         cardHTML.parentNode.insertBefore(newCodeTag, cardHTML); // add code tag in next to h1
@@ -99,12 +96,22 @@ angular.module('flash-card')
         newCodeTag.parentNode.insertBefore(newPreTag, newCodeTag); // add pre next to code
         newPreTag.appendChild(newCodeTag); // make code a child of pre
         // newCodeTag.parentNode.removeChild(newCodeTag.childNodes[0]); // remove the h1
-        newPreTag.parentNode.setAttribute("style", "padding:10px; text-align: left; overflow: hidden; overflow-y: scroll;");
+
+        // hopefully we have:
+        // <pre>
+        //   <code>stuff user typed</code>
+        // </pre>
+        //
+        // where the old h1 used to be
+
+        // change two quick default styles for this card:
+        newPreTag.parentNode.setAttribute("style", "padding:10px; text-align: left;");
+
         hljs.highlightBlock(newPreTag);
       }
     }, 1);
+
   };
-  //-------------------------------------------------------------------------------------
 
   this.handleRight = () => {
     console.log('right');
