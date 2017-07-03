@@ -1,6 +1,6 @@
-# Repeat.io
+# Repeat.it
 
-Repeat.io is a web app that allows users to create and study flashcards online. After signing into Repeat.io, users can create flashcard decks, edit existing decks, study their decks in random order and delete any decks they no longer need. A unique feature of Repeat.io is the ability to format flashcards in markdown text, allowing them to create flashcards for studying code snippets.
+Repeat.it is a web app that allows users to create and study flashcards online. After signing into Repeat.it, users can create flashcard decks, edit existing decks, study their decks in random order and delete any decks they no longer need. A unique feature of Repeat.it is the ability to style cards as code, allowing them to create flashcards for studying various programming language snippets.
 
 ## Team
 
@@ -22,7 +22,7 @@ Repeat.io is a web app that allows users to create and study flashcards online. 
 
 Log-in/Sign-in
 
-On your first visit to Repeat.io, create a user name and password and you'll automatically be logged into the site. You'll need to be signed into Repeat.io any time that you would like to review or change decks that you've created.
+On your first visit to Repeat.it, create a user name and password and you'll automatically be logged into the site. You'll need to be signed into Repeat.it any time that you would like to review or change decks that you've created.
 
 Home page
 
@@ -30,7 +30,7 @@ Click the "Create a new deck" button or the deck creation link at the top of the
 
 Create/edit deck pages
 
-Type the front and back content of each card in the designated text areas and create a card by hitting enter or the "Add card" button. Cards can be deleted and rearranged within the decks. To use markdown text on a card, use your cursor to highlight text on the card that you've already created and click the button on the top right corner of that corner to add markdown styling. Click "Click to save the deck" at the bottom of the page when you're done with your changes.
+Type the front and back content of each card in the designated text areas and create a card by hitting enter or the "Add card" button. Cards can be deleted and rearranged within the decks. To style a card as code click the button on the top right corner of the card. Click "Click to save the deck" at the bottom of the page when you're done with your changes.
 
 Study deck page
 
@@ -38,13 +38,15 @@ Click on the card to view the answer to the current question. Use the navigation
 
 ## Requirements
 
-- AngularJS 1.6.4,
-- Angular-route 1.6.4,
-- bcrypt ^1.0.2,
-- body-parser ^1.17.2,
-- express ^4.15.3,
-- mongoose ^4.10.8,
-- nodemon ^1.11.0
+- AngularJS 1.6.4 (included as CDN)
+- Angular-route (included as CDN)
+- bcrypt
+- body-parser
+- express
+- mongoose
+- mongoDB
+- Bootstrap (included as CDN)
+- Highlight.js (included as CDN)
 
 ## Development
 
@@ -54,17 +56,15 @@ From within the root directory:
 
 ```
 npm install
-
 ```
 ### Tasks
 
 In order to open the Node server and the MongoDB server, from within the root directory:
 
 ```
-nodemon server.js
-
+node server.js
 ```
 
 ## Contributing
 
-See [CONTRIBUTING.md](CONTRIBUTING.md) for contribution guidelines.
+See [CONTRIBUTING.md](CONTRIBUTING.md) for contribution guidelines and ideas to extend the app.
