@@ -1,5 +1,6 @@
 angular.module('flash-card')
 .controller('EditPageCtrl', function($http, $location){
+  var that = this;
   this.newCard = {plaintextFront: true, plaintextBack: true};
   //***** add more of the default schema ****
   this.deck = JSON.parse(localStorage.getItem('currentDeck'));
@@ -9,6 +10,7 @@ angular.module('flash-card')
     } else {
       this.deck.cards.push(this.newCard);
       this.newCard = {plaintextFront: true, plaintextBack: true};
+      $('#editQuestionField').focus();
     }
     console.log('this.deck----', this.deck);
   };
@@ -28,10 +30,13 @@ angular.module('flash-card')
     }
   };
 
+  this.showme = false;
+
   this.handleEditAndSave = function() {
     if(!this.deck.deckname) {
       alert("Please enter a deck name");
     } else {
+      this.showme = true;
       var id = this.deck._id;
       $http.put(`/decks/${id}`, this.deck)
         .then(function() {
@@ -44,6 +49,7 @@ angular.module('flash-card')
           function(err) {console.error('handleSave, EDIT', err);});
         },
       function(err) {console.error(err);});
+      setTimeout(function() {that.showme = false;}, 1000);
     }
   };
 

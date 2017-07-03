@@ -120,7 +120,7 @@ form > * {
   transform-origin: center;
   transform-style: preserve-3d;
   margin: 0 auto;
-  width: 50%;
+  width: 40%;
 }
 
 .flip .card .face {
@@ -132,8 +132,7 @@ form > * {
 .flip .card .front {
   position: relative;
   -webkit-backface-visibility: hidden;
-/*  z-index: 1;
-*/}
+}
 
 .flip .card .back {
   transform: rotateY(-180deg);
@@ -147,7 +146,8 @@ form > * {
   animation-timing-function: ease-in-out;
   animation-iteration-count: 3;
   animation-direction: initial;
-  opacity: 0
+  opacity: 0;
+  font-family: 'Raleway', sans-serif;
 }
 
 .ng-show {

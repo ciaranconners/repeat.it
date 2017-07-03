@@ -4,8 +4,8 @@
 
   <div>
     <h3>DECK NAME: <input ng-model="edit.deck.deckname"/>
-      <i class="fa fa-plus-circle" id="parentOfOnClickShowSavedForUserSide" ng-click="edit.handleEditAndSave(); showme=false; showme=true">
-        <span ng-show="showme" id="onClickShowSavedForUserSide">saved</span>
+      <i class="fa fa-plus-circle" id="parentOfOnClickShowSavedForUserSide" ng-click="edit.handleEditAndSave();" >
+        <span ng-show="edit.showme" id="onClickShowSavedForUserSide">saved</span>
       </i>
     </h3>
   </div>
@@ -14,7 +14,7 @@
       <div class="col-xs-5 flashcard">
         <h4>Question</h4>
         <hr>
-        <textarea placeholder="Enter a question" ng-model="edit.newCard.front"></textarea>
+        <textarea placeholder="Enter a question" ng-model="edit.newCard.front" id="editQuestionField"></textarea>
       </div>
 
       <div class="col-xs-5 flashcard">

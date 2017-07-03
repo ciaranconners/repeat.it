@@ -7,7 +7,7 @@
       <div class="col-xs-5 flashcard">
         <h4>Question</h4>
         <hr>
-        <textarea placeholder="Enter a question" ng-model="create.newCard.front"></textarea>
+        <textarea placeholder="Enter a question" ng-model="create.newCard.front" id="createQuestionField"></textarea>
       </div>
 
       <div class="col-xs-5 flashcard">
@@ -33,7 +33,7 @@
           </div>
 
           <hr>
-          <textarea placeholder="Enter a question" ng-model="card.front"></textarea>
+          <textarea placeholder="Enter a question" ng-model="card.front" ></textarea>
         </div>
 
         <div class="col-xs-5 flashcard">
@@ -57,6 +57,6 @@
 
     </div> <!-- end ng-repeat div -->
 
-    <button class="btn btn-primary savedeckbtn" type="button" ng-click="create.handleSave()">Click to save the deck</button>
+    <button class="btn btn-primary savedeckbtn" type="button" ng-click="create.handleSave()">Save the deck</button>
   </div>
 </div>
