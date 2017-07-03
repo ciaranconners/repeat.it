@@ -44,7 +44,7 @@ angular.module('flash-card')
         console.error(res.error);
       } else if (res.data === 'OK') {
         localStorage.setItem('currentUser', accName);
-        localStorage.setItem('decks', {});
+        localStorage.setItem('decks', JSON.stringify([]));
         $location.path('/app');
       } else if (res.data === 'NO') {
         alert('Username taken; please try another username.');
