@@ -36,6 +36,8 @@ Study deck page
 
 Click on the card to view the answer to the current question. Use the navigation buttons below the flashcard to choose whether to view the next card or a previous card. When you're done studying, click "Save and quit" to return to the home page.
 
+See [here](https://www.youtube.com/watch?v=dQw4w9WgXcQ) for more details.
+
 ## Requirements
 
 - AngularJS 1.6.4 (included as CDN)
