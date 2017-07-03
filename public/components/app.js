@@ -10,15 +10,25 @@ angular.module('flash-card')
     localStorage.setItem('currentDeck', JSON.stringify(deck));
   };
   this.handleDelete = function(deck) {
+  if (confirm('Are you sure you want to delete this deck?')) {
     var id = deck._id;
     $http.delete('/decks/' + id).then(function() {
-      $http.get('/decks', {params:{username: currentUser}}).then(function(res) {
+      $http.get('/decks', {
+        params: {
+          username: currentUser
+        }
+      }).then(function(res) {
         localStorage.setItem('decks', JSON.stringify(res.data));
         that.decks = res.data;
         console.log('inside handle delete', localStorage.getItem('decks'));
-      }, function(error) {console.error(error);});
-    }, function(error) {console.error(error);});
-  };
+      }, function(error) {
+        console.error(error);
+      });
+    }, function(error) {
+      console.error(error);
+    });
+  }
+};
   if (currentUser === null) {
     // this is to make the client-side wait for the public decks to arrive before setting this.decks
     console.log('you are not signed in');
