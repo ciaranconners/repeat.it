@@ -125,14 +125,6 @@ angular.module('flash-card')
     }, 1);
   };
 
-  this.handleRight = () => {
-    console.log('right');
-  };
-
-  this.handleWrong = () => {
-    console.log('wrong');
-  };
-
   this.handleSave = () => {
     var id = this.deck._id;
     var that = this;
