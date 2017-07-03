@@ -166,6 +166,29 @@ This is just to help you organize your process
 If you follow all of these guidelines and make good changes, you should have
 no problem getting your changes merged in.
 
+## Ideas to Extend the App
+
+- Ability to mark answers right or wrong and keep track of progress (useful with SRS)
+
+- Implement SRS option for users ([link to SRS algorithm](http://www.blueraja.com/blog/477/a-better-spaced-repetition-learning-algorithm-sm2))
+
+- Share decks/make public
+
+- Integrate keyboard keys for interacting with the app (like spacebar or arrow keys to flip cards)
+
+- Find a way to make textareas more user-friedly for adding code (maybe disable enter key when inside textarea)
+
+- Build upon current localStorage authentication by adding sessions
+
+- Add alternative login options (email, github, etc.)
+
+- Ability to change and recover a password
+
+- Add option for users to choose a code styling theme (see [style options](https://highlightjs.org/static/demo/) for ideas)
+
+- Allow uer to explicitly set language they are intending to style
+
+- Add support for markdown proper
 
 <!-- Links -->
 [style guide]: https://github.com/reactorcore/style-guide
