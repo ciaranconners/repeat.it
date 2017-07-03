@@ -2,8 +2,8 @@
 
   <div class="flip">
     <div class="card panel panel-default" ng-class="{'flipped':study.flipped}" ng-click="study.handleFlip()">
-      <div class="studycard face front panel-body" ng-if="study.front"><h1>{{ study.current.front }}</h1></div>
-      <div class="studycard face back panel-body" ng-if="!study.front"><h1>{{ study.current.back }}</h1></div>
+      <div class="studycard face front panel-body" ng-if="study.front"><h3>{{ study.current.front }}</h3></div>
+      <div class="studycard face back panel-body" ng-if="!study.front"><h3>{{ study.current.back }}</h3></div>
     </div>
   </div>
 

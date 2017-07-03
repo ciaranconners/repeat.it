@@ -23,6 +23,10 @@ li {
   margin-right: auto;
 }
 
+::-webkit-scrollbar {
+  display: none;
+}
+
 .flashcard h4 {
   text-align: center;
 }
@@ -48,7 +52,7 @@ td {
   width: 50%;
   text-align: center;
   height: 20em;
-  padding: 6.5em;
+  padding: 3em;
 }
 
 .codeToggleBtn {

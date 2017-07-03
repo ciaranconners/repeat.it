@@ -75,14 +75,28 @@ angular.module('flash-card')
     }
   };
 
+  //-------------------------------------------------------------------------------------
+  /*  This function essentially:
+   *    - checks if a given card is displaying a side that needs to be styled as code
+   *    - grabs the content of the card
+   *    - creates a new <code> element
+   *    - copies the data in
+   *    - inserts the new <code> element into the DOM and removes the old <h1>
+   *    - similarly wraps the <code> element in a newly created <pre> element
+   *    - applies a few basic styles
+   *
+   *  This function is run under four conditions: when a card is fliped, when 'next' or
+   *  or 'previous' buttons are clicked, and when the very first card is loaded for the
+   *  study session.
+   */
   this.highlightingHelperFn = (flashCardQuestion) => {
     $timeout(() => {
 
       if (this.front === true && this.current.plaintextFront === false || this.front === false && this.current.plaintextBack === false) {
         // our logic here
-        var card = document.getElementsByClassName("studycard");
-        var cardHTML = card[0].childNodes[0];
-        var content = flashCardQuestion || cardHTML.innerHTML; //the h1 value
+        var card = document.getElementsByClassName("studycard"); // card is an HTMLCollection object
+        var cardHTML = card[0].childNodes[0]; // the h1 in which we displayed the user input
+        var content = flashCardQuestion || cardHTML.innerHTML; // the value of the h1
 
         var newCodeTag = document.createElement('code');
 
@@ -95,9 +109,8 @@ angular.module('flash-card')
         var newPreTag = document.createElement('pre');
         newCodeTag.parentNode.insertBefore(newPreTag, newCodeTag); // add pre next to code
         newPreTag.appendChild(newCodeTag); // make code a child of pre
-        // newCodeTag.parentNode.removeChild(newCodeTag.childNodes[0]); // remove the h1
 
-        // hopefully we have:
+        // now we have:
         // <pre>
         //   <code>stuff user typed</code>
         // </pre>
@@ -105,12 +118,11 @@ angular.module('flash-card')
         // where the old h1 used to be
 
         // change two quick default styles for this card:
-        newPreTag.parentNode.setAttribute("style", "padding:10px; text-align: left;");
+        newPreTag.parentNode.setAttribute("style", "padding:10px; text-align: left; overflow: hidden; overflow-y: scroll;");
 
         hljs.highlightBlock(newPreTag);
       }
     }, 1);
-
   };
 
   this.handleRight = () => {
