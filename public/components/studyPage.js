@@ -31,56 +31,88 @@ angular.module('flash-card')
 
   this.counter = 0;
 
-  //-------------------------------------------------------------------
-  // Methods
+  var resetConditionToInitialState = {
+    'handleNext' : function (studyControllerVariables) {
+      var that = studyControllerVariables;
+      if (that.counter === that.shuffledDeck.length - 2) {
+        that.showNext = false;
+      }
+      that.showPrev = true;
+      that.counter++;
+      this.setToInitialState(studyControllerVariables);
+    },
+    'handlePrev' : function (studyControllerVariables) {
+      var that = studyControllerVariables;
+      if (that.counter - 1 === 0) {
+        that.showPrev = false;
+      }
+      that.showNext = true;
+      that.counter--;
+      this.setToInitialState(studyControllerVariables);
+    },
+    'setToInitialState' : function (studyControllerVariables) {
+      var that = studyControllerVariables;
+      that.front = true;
+      that.flipped = false;
+      that.current = that.shuffledDeck[that.counter];
+      that.highlightingHelperFn(that.current.front);
+    }
+  }
 
   this.handleNext = () => {
-    if(this.counter === this.shuffledDeck.length-2) {
-      this.showNext = false;
-    }
-    this.showPrev = true;
-    this.counter++;
-    this.current = this.shuffledDeck[this.counter];
-    this.front = true;
-    this.flipped = false;
-
-    $timeout(() => {
-      this.highlightingHelperFn();
-    }, 100);
+    resetConditionToInitialState['handleNext'](this);
   };
 
   this.handlePrev = () => {
-    if(this.counter - 1 === 0) {
-      this.showPrev = false;
-    }
-    this.showNext = true;
-    this.counter--;
-    this.current = this.shuffledDeck[this.counter];
-    this.flipped = false;
-    this.front = true;
-
-    $timeout(() => {
-      this.highlightingHelperFn();
-    }, 100);
+    resetConditionToInitialState['handlePrev'](this);
   };
 
   this.handleFlip = () => {
     this.front = !this.front;
     this.flipped = !this.flipped;
 
-    $timeout(() => {
-      this.highlightingHelperFn();
-    }, 100);
+    if (this.front === true && this.flipped === false) {
+      this.highlightingHelperFn(this.current.front);
+    } else {
+      this.highlightingHelperFn(this.current.back);
+    }
   };
 
-  // These buttons are not currently present on the page in this iteration
-  /*  this.handleRight = () => {
-      console.log('right');
-    };
 
-    this.handleWrong = () => {
-      console.log('wrong');
-    };*/
+  this.highlightingHelperFn = (flashCardQuestion) => {
+    $timeout(() => {
+
+      if (this.front === true && this.current.plaintextFront === false || this.front === false && this.current.plaintextBack === false) {
+        // our logic here
+        var card = document.getElementsByClassName("studycard");
+        var cardHTML = card[0].childNodes[0];
+        var content = flashCardQuestion || cardHTML.innerHTML; //the h1 value
+        var newCodeTag = document.createElement('code');
+
+        cardHTML.parentNode.insertBefore(newCodeTag, cardHTML); // add code tag in next to h1
+        newCodeTag.innerHTML = content; // copy the content
+        cardHTML.parentNode.removeChild(cardHTML); // remove the h1
+
+        // now we have a <code>stuff user typed</code> for each item
+
+        var newPreTag = document.createElement('pre');
+        newCodeTag.parentNode.insertBefore(newPreTag, newCodeTag); // add pre next to code
+        newPreTag.appendChild(newCodeTag); // make code a child of pre
+        // newCodeTag.parentNode.removeChild(newCodeTag.childNodes[0]); // remove the h1
+        newPreTag.parentNode.setAttribute("style", "padding:10px; text-align: left; overflow: hidden; overflow-y: scroll;");
+        hljs.highlightBlock(newPreTag);
+      }
+    }, 1);
+  };
+  //-------------------------------------------------------------------------------------
+
+  this.handleRight = () => {
+    console.log('right');
+  };
+
+  this.handleWrong = () => {
+    console.log('wrong');
+  };
 
   this.handleSave = () => {
     var id = this.deck._id;
@@ -97,56 +129,6 @@ angular.module('flash-card')
     });
   };
 
-  //-------------------------------------------------------------------------------------
-  /*  This function essentially:
-   *    - checks if a given card is displaying a side that needs to be styled as code
-   *    - grabs the content of the card
-   *    - creates a new <code> element
-   *    - copies the data in
-   *    - inserts the new <code> element into the DOM and removes the old <h1>
-   *    - similarly wraps the <code> element in a newly created <pre> element
-   *    - applies a few basic styles
-   *
-   *  This function is run under four conditions: when a card is fliped, when 'next' or
-   *  or 'previous' buttons are clicked, and when the very first card is loaded for the
-   *  study session.
-   */
-  this.highlightingHelperFn = () => {
-    if (this.front === true && this.current.plaintextFront === false || this.front === false && this.current.plaintextBack === false) {
-
-      var card = document.getElementsByClassName("studycard"); // card is an HTMLCollection object
-      var cardHTML = card[0].childNodes[0]; // the h1 in which we displayed the user input
-      var content = cardHTML.innerHTML; // the value of the h1
-
-      var newCodeTag = document.createElement('code');
-
-      cardHTML.parentNode.insertBefore(newCodeTag, cardHTML); // add code tag in next to h1
-      newCodeTag.innerHTML = content; // copy the content
-      cardHTML.parentNode.removeChild(cardHTML); // remove the h1
-
-      // now we have a <code>stuff user typed</code> for each item
-
-      var newPreTag = document.createElement('pre');
-      newCodeTag.parentNode.insertBefore(newPreTag, newCodeTag); // add pre next to code
-      newPreTag.appendChild(newCodeTag); // make code a child of pre
-
-      // now we have:
-      // <pre>
-      //   <code>stuff user typed</code>
-      // </pre>
-      //
-      // where the old h1 used to be
-
-      // change a few quick default styles for this card:
-      newPreTag.parentNode.setAttribute("style", "padding:10px; text-align: left; overflow: hidden; overflow-y: scroll;");
-
-      hljs.highlightBlock(newPreTag);
-    }
-  };
-  //-------------------------------------------------------------------------------------
-
-  // Check whether the front side of the first card requires code styling
-  $timeout(() => {
-    this.highlightingHelperFn();
-  }, 300);
+  // initialize the first card to check for whether to highlight
+  this.highlightingHelperFn();
 });

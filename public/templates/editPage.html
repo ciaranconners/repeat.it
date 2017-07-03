@@ -1,5 +1,12 @@
 <div ng-controller="EditPageCtrl as edit">
   <div class="container">
+  <div>
+    <h3>DECK NAME: <input ng-model="edit.deck.deckname"/>
+      <i class="fa fa-plus-circle" id="parentOfOnClickShowSavedForUserSide" ng-click="edit.handleEditAndSave(); showme=false; showme=true">
+        <span ng-show="showme" id="onClickShowSavedForUserSide">saved</span>
+      </i>
+    </h3>
+  </div>
 
     <h3>DECK NAME: <input ng-model="edit.deck.deckname" /></h3>
     <div class="row">

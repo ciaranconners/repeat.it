@@ -29,9 +29,30 @@ angular.module('flash-card')
     }
   };
 
+  this.handleEditAndSave = function() {
+    if(!this.deck.deckname) {
+      alert("Please enter a deck name");
+    } else {
+      var id = this.deck._id;
+      $http.put(`/decks/${id}`, this.deck)
+        .then(function() {
+          $http.get('/decks', {params: {username: localStorage.getItem('currentUser'),  deckname: JSON.parse(localStorage.getItem('currentDeck')).deckname}})
+            .then(function(response) {
+              console.log('getting decks', response);
+              localStorage.setItem('decks', JSON.stringify(response.data));
+              // $location.path('/app');
+            },
+          function(err) {console.error('handleSave, EDIT', err);});
+        },
+      function(err) {console.error(err);});
+    }
+  };
+
   this.deleteCard = function(card) {
-    var i = this.deck.cards.indexOf(card);
-    this.deck.cards.splice(i,1);
+    if (confirm('Are you sure you want to delete this card?')) {
+      var i = this.deck.cards.indexOf(card);
+      this.deck.cards.splice(i,1);
+    }
   };
 
   this.moveUp = function(card) {
