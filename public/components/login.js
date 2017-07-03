@@ -57,8 +57,6 @@ angular.module('flash-card')
   };
 })
 
-// on signup, if the password don't match AND the username is taken we have to fail twice
-
 .component('login', {
   controller: 'LoginCtrl',
   templateUrl: './templates/login.html' //calling from index.html
@@ -85,13 +83,3 @@ angular.module('flash-card')
       });
   };
 });
-
-
-
-// PLAN:
-
-// ON LOGIN, GET ALL DECKS AND SAVE TO LOCAL STORAGE
-// THE HOME PAGE CAN SET $CTRL.DATA TO THE DECKS SAVED IN LOCAL STORAGE
-
-// WE HAVE TO MAKE SURE TO INCLUDE A CALL TO THE DATABASE WHEN SAVING A DECK,
-// IN ORDER TO UPDATE WHAT WE HAVE AS 'DECKS' IN LOCAL STORAGE
