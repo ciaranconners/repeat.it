@@ -16,7 +16,7 @@ router.use(function(req, res, next) {
 router.get('/decks', function(req, res) {
   var username = req.query.username;
   if (req.query.username === 'null') {
-    var username = null;
+    username = null;
   }
   console.log('username', username);
   Deck.find({username: username})
@@ -32,9 +32,7 @@ router.get('/decks', function(req, res) {
 });
 
 router.post('/decks', function(req, res) {
-  // console.log('POST', req.body); => CONFIRMS THAT POST GOES THROUGH
   Deck.create(req.body).then(function(deck) {
-    // console.log('DECK', deck); => CONFIRMS THAT DECK IS SAVED SUCCESSFULLY
     res.json(deck);
   });
 });
@@ -51,14 +49,10 @@ router.put('/decks/', function(req, res) {
 });
 
 router.put('/decks/:id', function(req, res) {
-  // var username = req.body.username;
   var deckname = req.body.deckname;
-  // console.log(username);
   console.log('inside put', req.params.id);
-
   Deck.findByIdAndUpdate({_id: req.params.id}, {deckname: deckname}, {new:true})
     .then(function(deck) {
-      console.log(deck)
       res.status(200).send(deck);
     }
   );
